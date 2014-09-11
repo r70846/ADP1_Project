@@ -24,6 +24,9 @@
                                     <color key="titleColor" red="0.2827063259" green="0.3728320537" blue="0.71785315689999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="LhI-tf-pbU" kind="push" id="jco-WT-arc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTe-Od-VmH">
                                 <rect key="frame" x="200" y="172" width="80" height="66"/>
@@ -76,6 +79,9 @@
                                     <color key="titleColor" red="0.055341893789999999" green="0.29827668639999999" blue="0.71785315689999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="Drone" destination="vXZ-lx-hvc" eventType="touchUpInside" id="SV7-Qp-4Ya"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="C# / Db" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iaU-4f-XqT">
                                 <rect key="frame" x="226" y="431" width="80" height="30"/>
@@ -163,7 +169,7 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXX-Le-d5B">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXX-Le-d5B">
                                 <rect key="frame" x="20" y="136" width="150" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -193,6 +199,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1805" y="-657"/>
+        </scene>
+        <!--Setup View Controller-->
+        <scene sceneID="Q71-tA-qv8">
+            <objects>
+                <viewController id="LhI-tf-pbU" customClass="SetupViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lVM-e3-hFX"/>
+                        <viewControllerLayoutGuide type="bottom" id="T38-tQ-Evn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BT3-nu-rEz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ysu-kQ-OD8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HfC-2G-eCv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2336" y="-655"/>
         </scene>
         <!--View Controller - History-->
         <scene sceneID="gau-3G-KqL">

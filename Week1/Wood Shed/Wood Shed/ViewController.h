@@ -34,6 +34,7 @@
     AVAudioPlayer *drone1;
     AVAudioPlayer *drone2;
     NSTimer *droneTimer;
+    Boolean bDrone;
     
     IBOutlet UIButton *droneButton;
     
@@ -51,11 +52,11 @@
 
 -(IBAction)BeginPractice;
 
--(IBAction)Drone;
 
 -(IBAction)Metronome;
-
 - (IBAction)stepperChange:(UIStepper *)sender;
 
+-(IBAction)Drone;
+-(IBAction)DroneAgain;
 
 @end

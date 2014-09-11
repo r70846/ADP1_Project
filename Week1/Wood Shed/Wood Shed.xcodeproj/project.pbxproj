@@ -24,6 +24,19 @@
 		60999DB219C220DD0077055D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999DB119C220DD0077055D /* AudioToolbox.framework */; };
 		60999DB419C220E40077055D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999DB319C220E40077055D /* AVFoundation.framework */; };
 		60999DB619C2220C0077055D /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DB519C2220C0077055D /* click.wav */; };
+		60999DBC19C230420077055D /* A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DB719C230420077055D /* A.wav */; };
+		60999DBD19C230420077055D /* A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DB819C230420077055D /* A#.wav */; };
+		60999DBE19C230420077055D /* B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DB919C230420077055D /* B.wav */; };
+		60999DBF19C230420077055D /* C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DBA19C230420077055D /* C.wav */; };
+		60999DC019C230420077055D /* C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DBB19C230420077055D /* C#.wav */; };
+		60999DC819C230550077055D /* D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC119C230550077055D /* D.wav */; };
+		60999DC919C230550077055D /* D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC219C230550077055D /* D#.wav */; };
+		60999DCA19C230550077055D /* E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC319C230550077055D /* E.wav */; };
+		60999DCB19C230550077055D /* F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC419C230550077055D /* F.wav */; };
+		60999DCC19C230550077055D /* F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC519C230550077055D /* F#.wav */; };
+		60999DCD19C230550077055D /* G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC619C230550077055D /* G.wav */; };
+		60999DCE19C230550077055D /* G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC719C230550077055D /* G#.wav */; };
+		60999DD119C237240077055D /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60999DD019C237240077055D /* SetupViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +72,20 @@
 		60999DB119C220DD0077055D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		60999DB319C220E40077055D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		60999DB519C2220C0077055D /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click.wav; path = ../click.wav; sourceTree = "<group>"; };
+		60999DB719C230420077055D /* A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A.wav; sourceTree = "<group>"; };
+		60999DB819C230420077055D /* A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "A#.wav"; sourceTree = "<group>"; };
+		60999DB919C230420077055D /* B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = B.wav; sourceTree = "<group>"; };
+		60999DBA19C230420077055D /* C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C.wav; sourceTree = "<group>"; };
+		60999DBB19C230420077055D /* C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "C#.wav"; sourceTree = "<group>"; };
+		60999DC119C230550077055D /* D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = D.wav; sourceTree = "<group>"; };
+		60999DC219C230550077055D /* D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#.wav"; sourceTree = "<group>"; };
+		60999DC319C230550077055D /* E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = E.wav; sourceTree = "<group>"; };
+		60999DC419C230550077055D /* F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F.wav; sourceTree = "<group>"; };
+		60999DC519C230550077055D /* F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#.wav"; sourceTree = "<group>"; };
+		60999DC619C230550077055D /* G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = G.wav; sourceTree = "<group>"; };
+		60999DC719C230550077055D /* G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "G#.wav"; sourceTree = "<group>"; };
+		60999DCF19C237240077055D /* SetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupViewController.h; sourceTree = "<group>"; };
+		60999DD019C237240077055D /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +152,8 @@
 				60999D8B19C1DC5A0077055D /* AppDelegate.h */,
 				60999D8C19C1DC5A0077055D /* AppDelegate.m */,
 				60999D8E19C1DC5A0077055D /* Main.storyboard */,
+				60999DCF19C237240077055D /* SetupViewController.h */,
+				60999DD019C237240077055D /* SetupViewController.m */,
 				60999D9119C1DC5A0077055D /* ViewController.h */,
 				60999D9219C1DC5A0077055D /* ViewController.m */,
 				60999D9419C1DC5A0077055D /* Images.xcassets */,
@@ -136,6 +165,18 @@
 		60999D8319C1DC5A0077055D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				60999DC119C230550077055D /* D.wav */,
+				60999DC219C230550077055D /* D#.wav */,
+				60999DC319C230550077055D /* E.wav */,
+				60999DC419C230550077055D /* F.wav */,
+				60999DC519C230550077055D /* F#.wav */,
+				60999DC619C230550077055D /* G.wav */,
+				60999DC719C230550077055D /* G#.wav */,
+				60999DB719C230420077055D /* A.wav */,
+				60999DB819C230420077055D /* A#.wav */,
+				60999DB919C230420077055D /* B.wav */,
+				60999DBA19C230420077055D /* C.wav */,
+				60999DBB19C230420077055D /* C#.wav */,
 				60999DB519C2220C0077055D /* click.wav */,
 				60999D8419C1DC5A0077055D /* Wood Shed-Info.plist */,
 				60999D8519C1DC5A0077055D /* InfoPlist.strings */,
@@ -241,7 +282,19 @@
 			files = (
 				60999D9519C1DC5A0077055D /* Images.xcassets in Resources */,
 				60999D8719C1DC5A0077055D /* InfoPlist.strings in Resources */,
+				60999DBD19C230420077055D /* A#.wav in Resources */,
+				60999DCC19C230550077055D /* F#.wav in Resources */,
+				60999DC919C230550077055D /* D#.wav in Resources */,
+				60999DCB19C230550077055D /* F.wav in Resources */,
+				60999DCD19C230550077055D /* G.wav in Resources */,
+				60999DBE19C230420077055D /* B.wav in Resources */,
+				60999DBF19C230420077055D /* C.wav in Resources */,
+				60999DCA19C230550077055D /* E.wav in Resources */,
 				60999D9019C1DC5A0077055D /* Main.storyboard in Resources */,
+				60999DBC19C230420077055D /* A.wav in Resources */,
+				60999DCE19C230550077055D /* G#.wav in Resources */,
+				60999DC819C230550077055D /* D.wav in Resources */,
+				60999DC019C230420077055D /* C#.wav in Resources */,
 				60999DB619C2220C0077055D /* click.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60999DD119C237240077055D /* SetupViewController.m in Sources */,
 				60999D9319C1DC5A0077055D /* ViewController.m in Sources */,
 				60999D8D19C1DC5A0077055D /* AppDelegate.m in Sources */,
 				60999D8919C1DC5A0077055D /* main.m in Sources */,
