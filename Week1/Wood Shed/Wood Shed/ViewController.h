@@ -40,19 +40,20 @@
     //METRONOME
     SystemSoundID Click;
     NSTimer *nomeTimer;
-    int bpm;
+    int BPM;
+    Boolean bNome;
     
-    IBOutlet UILabel *nomeDisplay;
+    IBOutlet UITextField *nomeDisplay;
     IBOutlet UIStepper *stepperOne;
     IBOutlet UIStepper *stepperTen;
     IBOutlet UIButton *nomeButton;
 }
 
--(IBAction)Start;
+-(IBAction)BeginPractice;
 
--(IBAction)PLayAudioButton:(id)sender;
+-(IBAction)Drone;
 
--(IBAction)PLayBackgroundButton:(id)sender;
+-(IBAction)Metronome;
 
 - (IBAction)stepperChange:(UIStepper *)sender;
 

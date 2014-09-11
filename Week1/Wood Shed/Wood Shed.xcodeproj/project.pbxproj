@@ -21,6 +21,9 @@
 		60999D9E19C1DC5A0077055D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D8019C1DC5A0077055D /* UIKit.framework */; };
 		60999DA619C1DC5A0077055D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 60999DA419C1DC5A0077055D /* InfoPlist.strings */; };
 		60999DA819C1DC5A0077055D /* Wood_ShedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60999DA719C1DC5A0077055D /* Wood_ShedTests.m */; };
+		60999DB219C220DD0077055D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999DB119C220DD0077055D /* AudioToolbox.framework */; };
+		60999DB419C220E40077055D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999DB319C220E40077055D /* AVFoundation.framework */; };
+		60999DB619C2220C0077055D /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DB519C2220C0077055D /* click.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		60999DA319C1DC5A0077055D /* Wood ShedTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Wood ShedTests-Info.plist"; sourceTree = "<group>"; };
 		60999DA519C1DC5A0077055D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		60999DA719C1DC5A0077055D /* Wood_ShedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Wood_ShedTests.m; sourceTree = "<group>"; };
+		60999DB119C220DD0077055D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		60999DB319C220E40077055D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		60999DB519C2220C0077055D /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click.wav; path = ../click.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60999DB419C220E40077055D /* AVFoundation.framework in Frameworks */,
+				60999DB219C220DD0077055D /* AudioToolbox.framework in Frameworks */,
 				60999D7F19C1DC5A0077055D /* CoreGraphics.framework in Frameworks */,
 				60999D8119C1DC5A0077055D /* UIKit.framework in Frameworks */,
 				60999D7D19C1DC5A0077055D /* Foundation.framework in Frameworks */,
@@ -101,6 +109,8 @@
 		60999D7B19C1DC5A0077055D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				60999DB319C220E40077055D /* AVFoundation.framework */,
+				60999DB119C220DD0077055D /* AudioToolbox.framework */,
 				60999D7C19C1DC5A0077055D /* Foundation.framework */,
 				60999D7E19C1DC5A0077055D /* CoreGraphics.framework */,
 				60999D8019C1DC5A0077055D /* UIKit.framework */,
@@ -126,6 +136,7 @@
 		60999D8319C1DC5A0077055D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				60999DB519C2220C0077055D /* click.wav */,
 				60999D8419C1DC5A0077055D /* Wood Shed-Info.plist */,
 				60999D8519C1DC5A0077055D /* InfoPlist.strings */,
 				60999D8819C1DC5A0077055D /* main.m */,
@@ -231,6 +242,7 @@
 				60999D9519C1DC5A0077055D /* Images.xcassets in Resources */,
 				60999D8719C1DC5A0077055D /* InfoPlist.strings in Resources */,
 				60999D9019C1DC5A0077055D /* Main.storyboard in Resources */,
+				60999DB619C2220C0077055D /* click.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
