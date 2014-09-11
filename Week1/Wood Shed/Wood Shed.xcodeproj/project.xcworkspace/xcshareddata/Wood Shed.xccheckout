@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>59DD7958-C996-4419-8A70-0FBBE0C1C746</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Wood Shed</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6F46A3C7-9B2B-419D-9F66-D3C6856F592F</key>
+		<string>ssh://github.com/r70846/ADP1_Project</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Week1/Wood Shed/Wood Shed.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6F46A3C7-9B2B-419D-9F66-D3C6856F592F</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/r70846/ADP1_Project</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6F46A3C7-9B2B-419D-9F66-D3C6856F592F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6F46A3C7-9B2B-419D-9F66-D3C6856F592F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ADP1_Project</string>
+		</dict>
+	</array>
+</dict>
+</plist>
