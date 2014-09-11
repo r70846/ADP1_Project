@@ -7,7 +7,54 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface ViewController : UIViewController
+{
+    
+    //DISPLAY PRACTICE TASKS
+    IBOutlet UITextField * topicDisplay;
+    IBOutlet UITextView * detailsDisplay;
+    
+    //TIMER
+    IBOutlet UITextField * timerDisplay;
+    IBOutlet UIButton *beginButton;
+    IBOutlet UIButton *pauseButton;
+    IBOutlet UIButton *endButton;
+    
+    //COUNTER
+    IBOutlet UITextField * counterDisplay;
+    IBOutlet UIButton *plusButton;
+    IBOutlet UIButton *minusButton;
+    
+    //TONE GENERATOR
+    //two audio players and a timer will create identical overlaping loops
+    //two looping copies of the same wav file started at a time offest produce the drone
+    AVAudioPlayer *drone1;
+    AVAudioPlayer *drone2;
+    NSTimer *droneTimer;
+    
+    IBOutlet UIButton *droneButton;
+    
+    //METRONOME
+    SystemSoundID Click;
+    NSTimer *nomeTimer;
+    int bpm;
+    
+    IBOutlet UILabel *nomeDisplay;
+    IBOutlet UIStepper *stepperOne;
+    IBOutlet UIStepper *stepperTen;
+    IBOutlet UIButton *nomeButton;
+}
+
+-(IBAction)Start;
+
+-(IBAction)PLayAudioButton:(id)sender;
+
+-(IBAction)PLayBackgroundButton:(id)sender;
+
+- (IBAction)stepperChange:(UIStepper *)sender;
+
 
 @end
