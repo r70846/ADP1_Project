@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		605BFAE119C28F0100C66E2C /* PracticeSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 605BFAE019C28F0100C66E2C /* PracticeSession.m */; };
 		60999D7D19C1DC5A0077055D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D7C19C1DC5A0077055D /* Foundation.framework */; };
 		60999D7F19C1DC5A0077055D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D7E19C1DC5A0077055D /* CoreGraphics.framework */; };
 		60999D8119C1DC5A0077055D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D8019C1DC5A0077055D /* UIKit.framework */; };
@@ -50,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		605BFADF19C28F0100C66E2C /* PracticeSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracticeSession.h; sourceTree = "<group>"; };
+		605BFAE019C28F0100C66E2C /* PracticeSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PracticeSession.m; sourceTree = "<group>"; };
 		60999D7919C1DC5A0077055D /* Wood Shed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wood Shed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60999D7C19C1DC5A0077055D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		60999D7E19C1DC5A0077055D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -154,6 +157,8 @@
 				60999D8E19C1DC5A0077055D /* Main.storyboard */,
 				60999DCF19C237240077055D /* SetupViewController.h */,
 				60999DD019C237240077055D /* SetupViewController.m */,
+				605BFADF19C28F0100C66E2C /* PracticeSession.h */,
+				605BFAE019C28F0100C66E2C /* PracticeSession.m */,
 				60999D9119C1DC5A0077055D /* ViewController.h */,
 				60999D9219C1DC5A0077055D /* ViewController.m */,
 				60999D9419C1DC5A0077055D /* Images.xcassets */,
@@ -315,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60999DD119C237240077055D /* SetupViewController.m in Sources */,
+				605BFAE119C28F0100C66E2C /* PracticeSession.m in Sources */,
 				60999D9319C1DC5A0077055D /* ViewController.m in Sources */,
 				60999D8D19C1DC5A0077055D /* AppDelegate.m in Sources */,
 				60999D8919C1DC5A0077055D /* main.m in Sources */,
@@ -526,6 +532,7 @@
 				60999DAD19C1DC5A0077055D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		60999DAE19C1DC5A0077055D /* Build configuration list for PBXNativeTarget "Wood ShedTests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +541,7 @@
 				60999DB019C1DC5A0077055D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -26,6 +26,9 @@
 - (void)viewDidLoad
 {
 
+    //Build array of practice session objects
+    aSessions = [[NSMutableArray alloc] init];
+    
     //Disable user input of text feilds,( must use interface controls )
     topicDisplay.enabled = FALSE;
     timerDisplay.enabled = FALSE;
@@ -100,8 +103,9 @@
     
     if(!bPractice)
     {
-        //Set the current date
+        //Set the current date and time
         currentDate = [NSDate date];
+        //startTime = [NSDate];
         
         //Create format for date
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -112,6 +116,14 @@
         
         //Build the date into a string based on my day format
         dateString = [[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate: currentDate]];
+        
+        //Create format for times
+        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+        [timeFormatter setDateFormat:@"h:mm a"];
+        
+        //Build the start time into a string based on my time format
+        timeString = [[NSString alloc] initWithFormat:@"%@", [timeFormatter stringFromDate: currentDate]];
+        
         
         //Begin time display on click
         iTotalTime = 0;             //Initialize time counter
@@ -147,10 +159,21 @@
         //State Change
         bPractice = FALSE;
 
-        //Write data from practice session
+        //Log data from practice session
         NSLog(@"Topic: %@", topicDisplay.text);
         NSLog(@"Date: %@", dateString);
+        NSLog(@"Start: %@", timeString);
         NSLog(@"Duration: %i minutes", iTotalTime);
+        
+        //Create a Practice Session Object to hold and store the data
+        PracticeSession *currentSession = [[PracticeSession alloc] init];
+        currentSession.topic = topicDisplay.text;
+        currentSession.date = dateString;
+        currentSession.time = timeString;
+        currentSession.duration = sDuration;
+        
+        //Add current session to the record
+        [aSessions addObject:currentSession];
     }
 }
 
@@ -160,7 +183,8 @@
     
     if(bDisplayTimer)
     {
-        timerDisplay.text = [NSString stringWithFormat:@"%i min",iTotalTime];
+        sDuration = [NSString stringWithFormat:@"%i min",iTotalTime];
+        timerDisplay.text = sDuration;
     }
 }
 

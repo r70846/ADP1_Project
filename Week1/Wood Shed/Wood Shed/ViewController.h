@@ -18,13 +18,19 @@
 #import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "PracticeSession.h"
 
 @interface ViewController : UIViewController
 {
     
+    //Array to hold all sessions
+    NSMutableArray *aSessions;
+    
     //DATE TRACKING
     NSDate *currentDate;
     NSString *dateString;
+    NSString *timeString;
+    
     
     //DISPLAY PRACTICE TASKS
     IBOutlet UITextField *topicDisplay;
