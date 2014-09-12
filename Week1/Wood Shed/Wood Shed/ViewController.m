@@ -5,6 +5,15 @@
 //  Created by Russell Gaspard on 9/11/14.
 //  Copyright (c) 2014 Russell Gaspard. All rights reserved.
 //
+/*
+ 
+ Russ Gaspard
+ Full Sail
+ Mobile Development
+ ADP1 1409
+ Week 1
+ 
+ */
 
 #import "ViewController.h"
 
@@ -91,6 +100,19 @@
     
     if(!bPractice)
     {
+        //Set the current date
+        currentDate = [NSDate date];
+        
+        //Create format for date
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        if (dateFormatter != nil)
+        {
+            [dateFormatter setDateFormat:@"M/dd/YY"];
+        }
+        
+        //Build the date into a string based on my day format
+        dateString = [[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate: currentDate]];
+        
         //Begin time display on click
         iTotalTime = 0;             //Initialize time counter
         timerDisplay.text = [NSString stringWithFormat:@"%i min",iTotalTime];
@@ -124,6 +146,11 @@
         
         //State Change
         bPractice = FALSE;
+
+        //Write data from practice session
+        NSLog(@"Topic: %@", topicDisplay.text);
+        NSLog(@"Date: %@", dateString);
+        NSLog(@"Duration: %i minutes", iTotalTime);
     }
 }
 
