@@ -195,6 +195,10 @@
                                     <action selector="droneStepperChange:" destination="vXZ-lx-hvc" eventType="valueChanged" id="TiV-QX-siT"/>
                                 </connections>
                             </stepper>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gv0-fe-lH9">
+                                <rect key="frame" x="0.0" y="24" width="320" height="545"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.2827063259" green="0.3728320537" blue="0.71785315689999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -211,6 +215,7 @@
                         <outlet property="nomeButton" destination="fKZ-lF-69l" id="qCP-GF-W5e"/>
                         <outlet property="nomeDisplay" destination="xp6-VJ-icy" id="XSV-RZ-3PX"/>
                         <outlet property="plusButton" destination="O6R-ed-w1U" id="7ps-G1-8F2"/>
+                        <outlet property="splashScreen" destination="Gv0-fe-lH9" id="Wm7-EZ-9r6"/>
                         <outlet property="stepperOne" destination="a7e-od-83z" id="aY8-6F-czL"/>
                         <outlet property="stepperTen" destination="Nr1-pZ-C7v" id="Qht-YT-cbl"/>
                         <outlet property="timerDisplay" destination="3kd-qK-fdn" id="e6E-5D-JO4"/>
@@ -241,10 +246,10 @@
             </objects>
             <point key="canvasLocation" x="2336" y="-655"/>
         </scene>
-        <!--View Controller - History-->
+        <!--History View Controller - History-->
         <scene sceneID="gau-3G-KqL">
             <objects>
-                <viewController id="Ua9-Fy-bfA" sceneMemberID="viewController">
+                <viewController id="Ua9-Fy-bfA" customClass="HistoryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zDI-CP-JOj"/>
                         <viewControllerLayoutGuide type="bottom" id="Cga-sR-cVF"/>
@@ -252,6 +257,49 @@
                     <view key="view" contentMode="scaleToFill" id="PX6-Gi-EbD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Practice History" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNg-8T-LMw">
+                                <rect key="frame" x="75" y="40" width="185" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="pax-oJ-5fl">
+                                <rect key="frame" x="-2" y="97" width="322" height="426"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyCell" textLabel="7dZ-eX-3RB" detailTextLabel="h4M-fj-3vZ" style="IBUITableViewCellStyleValue1" id="sU0-IU-FK1">
+                                        <rect key="frame" x="0.0" y="22" width="322" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sU0-IU-FK1" id="Gy2-FI-5zM">
+                                            <rect key="frame" x="0.0" y="0.0" width="322" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7dZ-eX-3RB">
+                                                    <rect key="frame" x="15" y="11" width="33" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h4M-fj-3vZ">
+                                                    <rect key="frame" x="248" y="11" width="59" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ua9-Fy-bfA" id="dTS-vZ-A18"/>
+                                    <outlet property="delegate" destination="Ua9-Fy-bfA" id="XH8-fK-FlZ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="History" id="iLk-ta-xKV">
@@ -325,6 +373,9 @@
             <point key="canvasLocation" x="1279" y="-657"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="splash.png" width="320" height="545"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

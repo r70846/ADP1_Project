@@ -26,8 +26,79 @@
 - (void)viewDidLoad
 {
 
+    //DATA STOREAGE
+    
     //Build array of practice session objects
     aSessions = [[NSMutableArray alloc] init];
+    
+    
+    //find document directory, get the path to the document directory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
+    NSString *path = (NSString*)[paths objectAtIndex:0];
+    
+    //Path to Documents
+    //NSLog(@"%@", path);
+    
+    //findpath to my local data file
+    localPath = [path stringByAppendingPathComponent:@"datalog.json"];
+    
+    
+    //Path to local file
+    NSLog(@"%@", localPath);
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:localPath])
+    {
+        
+        //Path to local file
+        NSLog(@"%@", @"FILE EXISTS");
+        
+        
+
+        
+        //Read content of file as data object
+        NSData* oData = [NSData dataWithContentsOfFile:localPath];
+
+
+        //Serialize data object to JSON data (Mutable Array)
+        NSMutableArray *aData =  [NSJSONSerialization JSONObjectWithData:oData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
+        
+        /*
+        //Serialize data object to JSON data (Mutable Array)
+        aSessions = [NSJSONSerialization JSONObjectWithData:oData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
+            */
+        
+                PracticeSession *currentSession = [[PracticeSession alloc] init];
+         
+        //Loop though json data
+        for (NSInteger i=0; i<[aData count]; i++)
+        {
+            //currentSession = (PracticeSession *) [aData objectAtIndex:i];
+            
+            //Add current session to the record
+            //[aData addObject:currentSession];
+            
+            /*
+            //Log data from each session
+            NSLog(@"Topic: %@", currentSession.topic);
+            NSLog(@"Date: %@", currentSession.date);
+            NSLog(@"Start: %@", currentSession.time);
+            NSLog(@"Duration: %@", currentSession.duration);
+             */
+            
+            //NSLog(@"Topic: %@", [aData objectAtIndex:i]);
+            
+            
+            
+            
+        }
+         
+    }
+    
+    //SPLASH SCREEN
+    [self hideSplash];
+    
+    
+    //WOOD SHED FUNCTIONS
     
     //Disable user input of text feilds,( must use interface controls )
     topicDisplay.enabled = FALSE;
@@ -98,6 +169,63 @@
 }
 
 
+-(void)saveData
+{
+    //Create a Practice Session Object to hold and store the data
+    PracticeSession *currentSession = [[PracticeSession alloc] init];
+    currentSession.topic = topicDisplay.text;
+    currentSession.date = dateString;
+    currentSession.time = timeString;
+    currentSession.duration = sDuration;
+    
+    //Add current session to the records
+    [aSessions addObject:currentSession];
+    
+    NSLog(@"How many Sessions: %d", [aSessions count]);
+    
+    /*
+     //Save as a JSON file
+     if ([NSJSONSerialization isValidJSONObject: aSessions]) {
+     
+     NSData *jsonData = [NSJSONSerialization dataWithJSONObject: aSessions options: NSJSONWritingPrettyPrinted error: NULL];
+     [jsonData writeToFile:localPath atomically:YES];
+     }else
+     {
+     NSLog (@"can't save as JSON");
+     NSLog(@"%@", [aSessions description]);
+     }
+     */
+    
+
+}
+
+-(IBAction)hideSplash
+{
+    
+    fAlpha = 2;
+    
+    //Launch repeating timer to run fadeOut
+    fadeTimer = [NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(fadeOut) userInfo:nil repeats:YES];
+
+};
+
+
+-(void)fadeOut
+{
+    fAlpha = fAlpha - .01;
+    
+    if(fAlpha > 0 && fAlpha < 1)
+    {
+        splashScreen.alpha = fAlpha;
+        NSLog(@"Float is %f",fAlpha);
+    }
+    else if (fAlpha <= 0)
+    {
+        splashScreen.hidden = true;
+    }
+}
+
+
 -(IBAction)BeginPractice
 {
     
@@ -159,21 +287,13 @@
         //State Change
         bPractice = FALSE;
 
+        
+        [self saveData];
+        
         //Log data from practice session
-        NSLog(@"Topic: %@", topicDisplay.text);
-        NSLog(@"Date: %@", dateString);
-        NSLog(@"Start: %@", timeString);
-        NSLog(@"Duration: %i minutes", iTotalTime);
-        
-        //Create a Practice Session Object to hold and store the data
-        PracticeSession *currentSession = [[PracticeSession alloc] init];
-        currentSession.topic = topicDisplay.text;
-        currentSession.date = dateString;
-        currentSession.time = timeString;
-        currentSession.duration = sDuration;
-        
-        //Add current session to the record
-        [aSessions addObject:currentSession];
+        //NSLog(@"Topic: %@", topicDisplay.text);
+        //NSLog(@"Date: %@", dateString);
+        //NSLog(@"Start: %@", timeString);
     }
 }
 

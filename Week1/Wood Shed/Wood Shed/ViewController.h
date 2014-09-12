@@ -23,8 +23,15 @@
 @interface ViewController : UIViewController
 {
     
+    //Provide access to Splash Screen
+    IBOutlet UIImageView *splashScreen;
+    NSTimer *fadeTimer;
+    float fAlpha;
+    
     //Array to hold all sessions
     NSMutableArray *aSessions;
+    NSString *localPath;  //file system location
+    
     
     //DATE TRACKING
     NSDate *currentDate;
@@ -81,9 +88,12 @@
     IBOutlet UIButton *nomeButton;
 }
 
+-(IBAction)hideSplash;
+
 -(IBAction)BeginPractice;
 -(IBAction)displayTimer;
 
+-(void)saveData;
 
 -(IBAction)counterBtn:(UIButton *)button;
 

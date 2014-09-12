@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		605BFAE119C28F0100C66E2C /* PracticeSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 605BFAE019C28F0100C66E2C /* PracticeSession.m */; };
+		605BFAE419C29A9300C66E2C /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 605BFAE319C29A9300C66E2C /* HistoryViewController.m */; };
+		607DD26419C31F5A00097630 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 607DD26319C31F5A00097630 /* splash.png */; };
 		60999D7D19C1DC5A0077055D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D7C19C1DC5A0077055D /* Foundation.framework */; };
 		60999D7F19C1DC5A0077055D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D7E19C1DC5A0077055D /* CoreGraphics.framework */; };
 		60999D8119C1DC5A0077055D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D8019C1DC5A0077055D /* UIKit.framework */; };
@@ -53,6 +55,9 @@
 /* Begin PBXFileReference section */
 		605BFADF19C28F0100C66E2C /* PracticeSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracticeSession.h; sourceTree = "<group>"; };
 		605BFAE019C28F0100C66E2C /* PracticeSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PracticeSession.m; sourceTree = "<group>"; };
+		605BFAE219C29A9300C66E2C /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		605BFAE319C29A9300C66E2C /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		607DD26319C31F5A00097630 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = ../splash.png; sourceTree = "<group>"; };
 		60999D7919C1DC5A0077055D /* Wood Shed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wood Shed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60999D7C19C1DC5A0077055D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		60999D7E19C1DC5A0077055D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -155,6 +160,8 @@
 				60999D8B19C1DC5A0077055D /* AppDelegate.h */,
 				60999D8C19C1DC5A0077055D /* AppDelegate.m */,
 				60999D8E19C1DC5A0077055D /* Main.storyboard */,
+				605BFAE219C29A9300C66E2C /* HistoryViewController.h */,
+				605BFAE319C29A9300C66E2C /* HistoryViewController.m */,
 				60999DCF19C237240077055D /* SetupViewController.h */,
 				60999DD019C237240077055D /* SetupViewController.m */,
 				605BFADF19C28F0100C66E2C /* PracticeSession.h */,
@@ -170,6 +177,7 @@
 		60999D8319C1DC5A0077055D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				607DD26319C31F5A00097630 /* splash.png */,
 				60999DC119C230550077055D /* D.wav */,
 				60999DC219C230550077055D /* D#.wav */,
 				60999DC319C230550077055D /* E.wav */,
@@ -299,6 +307,7 @@
 				60999DBC19C230420077055D /* A.wav in Resources */,
 				60999DCE19C230550077055D /* G#.wav in Resources */,
 				60999DC819C230550077055D /* D.wav in Resources */,
+				607DD26419C31F5A00097630 /* splash.png in Resources */,
 				60999DC019C230420077055D /* C#.wav in Resources */,
 				60999DB619C2220C0077055D /* click.wav in Resources */,
 			);
@@ -324,6 +333,7 @@
 				60999D9319C1DC5A0077055D /* ViewController.m in Sources */,
 				60999D8D19C1DC5A0077055D /* AppDelegate.m in Sources */,
 				60999D8919C1DC5A0077055D /* main.m in Sources */,
+				605BFAE419C29A9300C66E2C /* HistoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
