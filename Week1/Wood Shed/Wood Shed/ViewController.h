@@ -14,27 +14,41 @@
 {
     
     //DISPLAY PRACTICE TASKS
-    IBOutlet UITextField * topicDisplay;
-    IBOutlet UITextView * detailsDisplay;
+    IBOutlet UITextField *topicDisplay;
+    IBOutlet UITextView *detailsDisplay;
+    
+    
     
     //TIMER
-    IBOutlet UITextField * timerDisplay;
+    IBOutlet UITextField *timerDisplay;
     IBOutlet UIButton *beginButton;
     IBOutlet UIButton *pauseButton;
     IBOutlet UIButton *endButton;
+    IBOutlet UIButton *viewButton;
+    
+    int iTotalTime;
+    NSString *sDuration;
+    NSTimer *durationTimer;
+    Boolean bDisplayTimer;
+    Boolean bPractice;
     
     //COUNTER
-    IBOutlet UITextField * counterDisplay;
+    IBOutlet UITextField *counterDisplay;
     IBOutlet UIButton *plusButton;
     IBOutlet UIButton *minusButton;
+    int iTotalCount;
     
     //TONE GENERATOR
     //two audio players and a timer will create identical overlaping loops
     //two looping copies of the same wav file started at a time offest produce the drone
     AVAudioPlayer *drone1;
     AVAudioPlayer *drone2;
-    NSTimer *droneTimer;
+    IBOutlet UITextField *droneDisplay;
+    NSMutableArray *keyArray;
     Boolean bDrone;
+    
+    
+    IBOutlet UIStepper *droneStepper;
     
     IBOutlet UIButton *droneButton;
     
@@ -51,12 +65,16 @@
 }
 
 -(IBAction)BeginPractice;
+-(IBAction)displayTimer;
+
+
+-(IBAction)counterBtn:(UIButton *)button;
 
 
 -(IBAction)Metronome;
-- (IBAction)stepperChange:(UIStepper *)sender;
+-(IBAction)stepperChange:(UIStepper *)sender;
 
 -(IBAction)Drone;
--(IBAction)DroneAgain;
+-(IBAction)droneStepperChange:(UIStepper *)sender;
 
 @end
