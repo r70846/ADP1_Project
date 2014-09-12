@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataStore.h"
 
 @interface HistoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
-    UITableView *MainTable;
+    
+    //DATA STORAGE
+    DataStore *dataStore;    //shared instance of my data store object
+    
+    IBOutlet  UITableView *mainTableView;
 }
 @end

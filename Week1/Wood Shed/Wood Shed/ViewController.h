@@ -18,7 +18,7 @@
 #import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
-#import "PracticeSession.h"
+#import "DataStore.h"
 
 @interface ViewController : UIViewController
 {
@@ -28,12 +28,10 @@
     NSTimer *fadeTimer;
     float fAlpha;
     
-    //Array to hold all sessions
-    NSMutableArray *aSessions;
-    NSString *localPath;  //file system location
-    
-    
-    
+
+    //DATA STORAGE
+    DataStore *dataStore;    //shared instance of my data store object
+    NSString *localPath;     //Variable to access my local data file
     
     
     //DATE TRACKING

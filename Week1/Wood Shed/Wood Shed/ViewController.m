@@ -28,9 +28,11 @@
 
     //DATA STOREAGE
     
-    //Build array of practice session objects
-    aSessions = [[NSMutableArray alloc] init];
+    //setup shared instance of data storage in RAM
+    dataStore = [DataStore sharedInstance];
     
+    //Build array of practice session objects
+    dataStore.sessions = [[NSMutableArray alloc] init];
     
     //find document directory, get the path to the document directory
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
@@ -46,18 +48,18 @@
         NSData* oData = [NSData dataWithContentsOfFile:localPath];
 
         //Serialize data object to JSON data (Mutable Array)
-        aSessions = [NSJSONSerialization JSONObjectWithData:oData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
+        dataStore.sessions = [NSJSONSerialization JSONObjectWithData:oData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
 
         //Create "Session" Dictionary to hold data
         NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
         
         //Switch to log out data
-        if(FALSE)
+        if(false)
         {
-            for (NSInteger i=0; i<[aSessions count]; i++)
+            for (NSInteger i=0; i<[dataStore.sessions count]; i++)
             {
                 //Log data from each session
-                dCurrentSession = (NSMutableDictionary *)[aSessions objectAtIndex:i];
+                dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:i];
                 NSLog(@"Topic: %@", [dCurrentSession objectForKey: @"topic"]);
                 NSLog(@"Date: %@", [dCurrentSession objectForKey: @"date"]);
                 NSLog(@"Start: %@", [dCurrentSession objectForKey: @"time"]);
@@ -65,7 +67,6 @@
             }
         }
     }
-    
     
     //SPLASH SCREEN
     [self hideSplash];
@@ -132,6 +133,8 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -141,8 +144,6 @@
 
 -(void)saveData
 {
-
-    
     //Create "Session" Dictionary to hold data
     NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
     [dCurrentSession setValue:topicDisplay.text forKey:@"topic"];
@@ -151,14 +152,13 @@
     [dCurrentSession setValue:sDuration forKey:@"duration"];
     
     //Add current session to the records
-    [aSessions addObject:dCurrentSession];
-    
+    [dataStore.sessions addObject:dCurrentSession];
     
     //Switch to log out data
-    if(FALSE)
+    if(false)
     {
         //Log data from session being saved
-        dCurrentSession = (NSMutableDictionary *)[aSessions objectAtIndex:[aSessions count]-1];
+        dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:[dataStore.sessions count]-1];
         NSLog(@"Topic: %@", [dCurrentSession objectForKey: @"topic"]);
         NSLog(@"Date: %@", [dCurrentSession objectForKey: @"date"]);
         NSLog(@"Start: %@", [dCurrentSession objectForKey: @"time"]);
@@ -166,23 +166,21 @@
     }
 
      //Save as a JSON file
-     if ([NSJSONSerialization isValidJSONObject: aSessions]) {
+     if ([NSJSONSerialization isValidJSONObject: dataStore.sessions]) {
      
-     NSData *jsonData = [NSJSONSerialization dataWithJSONObject: aSessions options: NSJSONWritingPrettyPrinted error: NULL];
+     NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dataStore.sessions options: NSJSONWritingPrettyPrinted error: NULL];
      [jsonData writeToFile:localPath atomically:YES];
      }else
      {
          NSLog (@"can't save as JSON");
-         NSLog(@"%@", [aSessions description]);
+         NSLog(@"%@", [dataStore.sessions description]);
      }
-
-    
-
 }
+
 
 -(IBAction)hideSplash
 {
-    fAlpha = 2;
+    fAlpha = 2; //Initialize alpha at 2 but don't start fade till 1. let it linger for a sec!
     
     //Launch repeating timer to run fadeOut
     fadeTimer = [NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(fadeOut) userInfo:nil repeats:YES];
@@ -191,13 +189,14 @@
 
 -(void)fadeOut
 {
-    fAlpha = fAlpha - .01;
+    fAlpha = fAlpha - .01;     //Fade Splash Screen
     
-    if(fAlpha > 0 && fAlpha < 1)
+    if(fAlpha > 0 && fAlpha < 1) //Don't start fade till 1. let it linger for a sec!
     {
         splashScreen.alpha = fAlpha;
     }
-    else if (fAlpha <= 0)
+    else if (fAlpha <= 0)       //Once it fades to zclear get it out of users way
+
     {
         splashScreen.hidden = true;
     }
@@ -229,7 +228,6 @@
         //Build the start time into a string based on my time format
         timeString = [[NSString alloc] initWithFormat:@"%@", [timeFormatter stringFromDate: currentDate]];
         
-        
         //Inititlaize time tracker on "begin"
         iTotalTime = 0;
         sDuration = [NSString stringWithFormat:@"%i min",iTotalTime];
@@ -238,7 +236,6 @@
             timerDisplay.text = sDuration;
         }
 
-        
         //Launch repeating timer to run "Tick"
         durationTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(oneRound) userInfo:nil repeats:YES];
         
@@ -268,18 +265,13 @@
         
         //State Change
         bPractice = FALSE;
-
         
         [self saveData];
-        
-        //Log data from practice session
-        //NSLog(@"Topic: %@", topicDisplay.text);
-        //NSLog(@"Date: %@", dateString);
-        //NSLog(@"Start: %@", timeString);
     }
 }
 
--(void)oneRound
+
+-(void)oneRound //Add one minute to timer
 {
     iTotalTime++;
     sDuration = [NSString stringWithFormat:@"%i min",iTotalTime];
@@ -289,6 +281,7 @@
         timerDisplay.text = sDuration;
     }
 }
+
 
 -(IBAction)displayTimer
 {
@@ -390,6 +383,7 @@
     AudioServicesPlaySystemSound(Click);
 }
 
+
 - (IBAction)stepperChange:(UIStepper *)sender //Change BPM on metronome
 {
     
@@ -448,6 +442,7 @@
     //Display the tonic note user has chosen
     droneDisplay.text = [NSString stringWithFormat:@"%@",[keyArray objectAtIndex:(int)droneStepper.value]];
 }
+
 
 -(IBAction)Drone
 {
@@ -514,8 +509,6 @@
         bDrone = FALSE;
     }
 }
-
-
 
 
 @end

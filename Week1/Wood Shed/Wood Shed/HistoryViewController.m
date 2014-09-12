@@ -25,8 +25,19 @@
 
 - (void)viewDidLoad
 {
+    
+    //setup shared instance of data storage in RAM
+    dataStore = [DataStore sharedInstance];
+
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //NSLog(@"Total Records: %i", [dataStore.sessions count]);
+    [self->mainTableView reloadData]; // to reload selected cell
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,26 +46,37 @@
     // Dispose of any resources that can be recreated.
 }
 
-//Number of rows in table will equal the number of practice objects in my data array
+
+//Number of rows in table will equal the number of session objects in my data array
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //return [aPracticeArray count];
-    return 3;
+
+    return [dataStore.sessions count];
     
 }
 
-//Set each custom cell to reflect data from the same index of my aPractice objects array
+//Set each custom cell to reflect data from the same index of my dictionary "session" objects array
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProtoCell"];
     
     if (cell != nil)
     {
         //PracticeSession *currentSession = [aPracticeArray objectAtIndex:indexPath.row];
         //[cell refreshCellWithInfo:currentSession.topic instString:currentMusician.instrument cellImage:currentMusician.instImage];
         
-        cell.textLabel.text = @"Practice Title";
+        //dataStore.sessions
         
+        //Create "Session" Dictionary to hold data
+        NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
+        dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:indexPath.row];
+
+        //Combine date and time into single string
+        NSString *dateTime = [[NSString alloc] initWithFormat:@"%@ %@",[dCurrentSession objectForKey: @"date"],[dCurrentSession objectForKey: @"time"]];
+        
+        //Shoe title, date anad time in cell
+        cell.textLabel.text = [dCurrentSession objectForKey: @"topic"];
+        cell.detailTextLabel.text = dateTime;
         
     }
     return cell;

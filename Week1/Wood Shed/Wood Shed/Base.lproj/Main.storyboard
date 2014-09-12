@@ -269,7 +269,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyCell" textLabel="7dZ-eX-3RB" detailTextLabel="h4M-fj-3vZ" style="IBUITableViewCellStyleValue1" id="sU0-IU-FK1">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProtoCell" textLabel="7dZ-eX-3RB" detailTextLabel="h4M-fj-3vZ" style="IBUITableViewCellStyleValue1" id="sU0-IU-FK1">
                                         <rect key="frame" x="0.0" y="22" width="322" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sU0-IU-FK1" id="Gy2-FI-5zM">
@@ -305,6 +305,9 @@
                     <tabBarItem key="tabBarItem" title="History" id="iLk-ta-xKV">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-8"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="mainTableView" destination="pax-oJ-5fl" id="zwP-bE-qEV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNf-ia-CEx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
