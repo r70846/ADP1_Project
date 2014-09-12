@@ -36,67 +36,39 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
     NSString *path = (NSString*)[paths objectAtIndex:0];
     
-    //Path to Documents
-    //NSLog(@"%@", path);
-    
-    //findpath to my local data file
+    //get path to my local data file
     localPath = [path stringByAppendingPathComponent:@"datalog.json"];
-    
-    
-    //Path to local file
-    NSLog(@"%@", localPath);
-    
+
+    //If file exists load data
     if([[NSFileManager defaultManager] fileExistsAtPath:localPath])
     {
-        
-        //Path to local file
-        NSLog(@"%@", @"FILE EXISTS");
-        
-        
-
-        
         //Read content of file as data object
         NSData* oData = [NSData dataWithContentsOfFile:localPath];
 
-
-        //Serialize data object to JSON data (Mutable Array)
-        NSMutableArray *aData =  [NSJSONSerialization JSONObjectWithData:oData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
-        
-        /*
         //Serialize data object to JSON data (Mutable Array)
         aSessions = [NSJSONSerialization JSONObjectWithData:oData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
-            */
+
+        //Create "Session" Dictionary to hold data
+        NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
         
-                PracticeSession *currentSession = [[PracticeSession alloc] init];
-         
-        //Loop though json data
-        for (NSInteger i=0; i<[aData count]; i++)
+        //Switch to log out data
+        if(FALSE)
         {
-            //currentSession = (PracticeSession *) [aData objectAtIndex:i];
-            
-            //Add current session to the record
-            //[aData addObject:currentSession];
-            
-            /*
-            //Log data from each session
-            NSLog(@"Topic: %@", currentSession.topic);
-            NSLog(@"Date: %@", currentSession.date);
-            NSLog(@"Start: %@", currentSession.time);
-            NSLog(@"Duration: %@", currentSession.duration);
-             */
-            
-            //NSLog(@"Topic: %@", [aData objectAtIndex:i]);
-            
-            
-            
-            
+            for (NSInteger i=0; i<[aSessions count]; i++)
+            {
+                //Log data from each session
+                dCurrentSession = (NSMutableDictionary *)[aSessions objectAtIndex:i];
+                NSLog(@"Topic: %@", [dCurrentSession objectForKey: @"topic"]);
+                NSLog(@"Date: %@", [dCurrentSession objectForKey: @"date"]);
+                NSLog(@"Start: %@", [dCurrentSession objectForKey: @"time"]);
+                NSLog(@"Duration: %@", [dCurrentSession objectForKey: @"duration"]);
+            }
         }
-         
     }
+    
     
     //SPLASH SCREEN
     [self hideSplash];
-    
     
     //WOOD SHED FUNCTIONS
     
@@ -109,10 +81,8 @@
     //PRACTICE SESSION AND TIMER
     bPractice = FALSE;
     
-
     iTotalTime = 0;             //Initialize time counter
     bDisplayTimer = TRUE;
-    
     
     //COUNTER
     iTotalCount = 0;             //Initialize time counter
@@ -171,19 +141,30 @@
 
 -(void)saveData
 {
-    //Create a Practice Session Object to hold and store the data
-    PracticeSession *currentSession = [[PracticeSession alloc] init];
-    currentSession.topic = topicDisplay.text;
-    currentSession.date = dateString;
-    currentSession.time = timeString;
-    currentSession.duration = sDuration;
+
+    
+    //Create "Session" Dictionary to hold data
+    NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
+    [dCurrentSession setValue:topicDisplay.text forKey:@"topic"];
+    [dCurrentSession setValue:dateString forKey:@"date"];
+    [dCurrentSession setValue:timeString forKey:@"time"];
+    [dCurrentSession setValue:sDuration forKey:@"duration"];
     
     //Add current session to the records
-    [aSessions addObject:currentSession];
+    [aSessions addObject:dCurrentSession];
     
-    NSLog(@"How many Sessions: %d", [aSessions count]);
     
-    /*
+    //Switch to log out data
+    if(FALSE)
+    {
+        //Log data from session being saved
+        dCurrentSession = (NSMutableDictionary *)[aSessions objectAtIndex:[aSessions count]-1];
+        NSLog(@"Topic: %@", [dCurrentSession objectForKey: @"topic"]);
+        NSLog(@"Date: %@", [dCurrentSession objectForKey: @"date"]);
+        NSLog(@"Start: %@", [dCurrentSession objectForKey: @"time"]);
+        NSLog(@"Duration: %@", [dCurrentSession objectForKey: @"duration"]);
+    }
+
      //Save as a JSON file
      if ([NSJSONSerialization isValidJSONObject: aSessions]) {
      
@@ -191,22 +172,20 @@
      [jsonData writeToFile:localPath atomically:YES];
      }else
      {
-     NSLog (@"can't save as JSON");
-     NSLog(@"%@", [aSessions description]);
+         NSLog (@"can't save as JSON");
+         NSLog(@"%@", [aSessions description]);
      }
-     */
+
     
 
 }
 
 -(IBAction)hideSplash
 {
-    
     fAlpha = 2;
     
     //Launch repeating timer to run fadeOut
     fadeTimer = [NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(fadeOut) userInfo:nil repeats:YES];
-
 };
 
 
@@ -217,7 +196,6 @@
     if(fAlpha > 0 && fAlpha < 1)
     {
         splashScreen.alpha = fAlpha;
-        NSLog(@"Float is %f",fAlpha);
     }
     else if (fAlpha <= 0)
     {
@@ -233,7 +211,6 @@
     {
         //Set the current date and time
         currentDate = [NSDate date];
-        //startTime = [NSDate];
         
         //Create format for date
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -253,9 +230,14 @@
         timeString = [[NSString alloc] initWithFormat:@"%@", [timeFormatter stringFromDate: currentDate]];
         
         
-        //Begin time display on click
-        iTotalTime = 0;             //Initialize time counter
-        timerDisplay.text = [NSString stringWithFormat:@"%i min",iTotalTime];
+        //Inititlaize time tracker on "begin"
+        iTotalTime = 0;
+        sDuration = [NSString stringWithFormat:@"%i min",iTotalTime];
+        if(bDisplayTimer)
+        {
+            timerDisplay.text = sDuration;
+        }
+
         
         //Launch repeating timer to run "Tick"
         durationTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(oneRound) userInfo:nil repeats:YES];
@@ -300,10 +282,10 @@
 -(void)oneRound
 {
     iTotalTime++;
+    sDuration = [NSString stringWithFormat:@"%i min",iTotalTime];
     
     if(bDisplayTimer)
     {
-        sDuration = [NSString stringWithFormat:@"%i min",iTotalTime];
         timerDisplay.text = sDuration;
     }
 }

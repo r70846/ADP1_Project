@@ -196,7 +196,7 @@
                                 </connections>
                             </stepper>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gv0-fe-lH9">
-                                <rect key="frame" x="0.0" y="24" width="320" height="545"/>
+                                <rect key="frame" x="44" y="155" width="82" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
