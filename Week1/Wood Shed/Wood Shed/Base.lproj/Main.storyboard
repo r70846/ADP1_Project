@@ -25,7 +25,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="LhI-tf-pbU" kind="push" id="jco-WT-arc"/>
+                                    <segue destination="LhI-tf-pbU" kind="push" identifier="segueToSetup" id="jco-WT-arc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTe-Od-VmH">
@@ -196,7 +196,7 @@
                                 </connections>
                             </stepper>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gv0-fe-lH9">
-                                <rect key="frame" x="44" y="155" width="82" height="58"/>
+                                <rect key="frame" x="0.0" y="1" width="320" height="545"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>

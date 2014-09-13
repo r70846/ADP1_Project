@@ -31,6 +31,9 @@
     //setup shared instance of data storage in RAM
     dataStore = [DataStore sharedInstance];
     
+    //Inititlaize topic variable
+    dataStore.currentTopic = topicDisplay.text;
+    
     //Build array of practice session objects
     dataStore.sessions = [[NSMutableArray alloc] init];
     
@@ -133,7 +136,11 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    topicDisplay.text = dataStore.currentTopic;
+}
 
 - (void)didReceiveMemoryWarning
 {

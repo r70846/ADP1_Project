@@ -16,5 +16,6 @@
 + (DataStore *) sharedInstance;
 
 @property (nonatomic, strong)NSMutableArray *sessions;
+@property (nonatomic, strong)NSString *currentTopic;
 
 @end

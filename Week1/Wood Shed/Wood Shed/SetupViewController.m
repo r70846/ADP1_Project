@@ -34,10 +34,8 @@
 
 - (void)viewDidLoad
 {
-    
-    //Inititlaize
-    _currentTopic = @"";
-    
+    //setup shared instance of data storage in RAM
+    dataStore = [DataStore sharedInstance];
     
     //Create Array to hold all possible topics
     topicArray = [[NSMutableArray alloc] init];
@@ -62,8 +60,14 @@
         [topicActionSheet addButtonWithTitle:topic];
     }
 
-    //Add cancel button one the end
+    //Add cancel button on the end
     topicActionSheet.cancelButtonIndex = [topicActionSheet addButtonWithTitle:@"Cancel"];
+    
+    //This is a bit of a hack but effective...
+    //Bottom button can't be clicked due to tab bar in the superview
+    //Adding a blank button at the bottom makes others accessible
+    [topicActionSheet addButtonWithTitle:@""];
+    
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
@@ -72,13 +76,17 @@
 -(IBAction)chooseTopic
 {
     [topicActionSheet showInView:self.view];
+    //[topicActionSheet showFromTabBar:self.view];
 }
 
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (actionSheet.tag == 1) {
-        _currentTopic = [topicArray objectAtIndex:buttonIndex];
-        topicDisplay.text = _currentTopic;
+        if(buttonIndex < [topicArray count])
+        {
+            dataStore.currentTopic = [topicArray objectAtIndex:buttonIndex];
+            topicDisplay.text = dataStore.currentTopic;
+        }
     }
 }
 

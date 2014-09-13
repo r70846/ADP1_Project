@@ -16,10 +16,14 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "DataStore.h"
 
 @interface SetupViewController : UIViewController <UIActionSheetDelegate>
 
 {
+    //DATA STORAGE
+    DataStore *dataStore;    //shared instance of my data store object
+    
     IBOutlet UITextField *topicDisplay;
     IBOutlet UIButton *topicButton;
     NSMutableArray *topicArray;
@@ -29,6 +33,5 @@
 
 -(IBAction)chooseTopic;
 
-@property (nonatomic, strong)NSString *currentTopic;
 
 @end
