@@ -43,7 +43,8 @@
     
     //get path to my local data file
     localPath = [path stringByAppendingPathComponent:@"datalog.json"];
-
+    NSLog(@"%@", localPath);
+    
     //If file exists load data
     if([[NSFileManager defaultManager] fileExistsAtPath:localPath])
     {
