@@ -17,10 +17,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SetupViewController : UIViewController
+@interface SetupViewController : UIViewController <UIActionSheetDelegate>
+
 {
-    
+    IBOutlet UITextField *topicDisplay;
+    IBOutlet UIButton *topicButton;
+    NSMutableArray *topicArray;
+    UIActionSheet *topicActionSheet;
 }
+
+
+-(IBAction)chooseTopic;
 
 @property (nonatomic, strong)NSString *currentTopic;
 
