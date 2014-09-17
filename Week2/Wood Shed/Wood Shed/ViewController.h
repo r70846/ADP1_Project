@@ -35,7 +35,7 @@
     NSString *localPath;     //Variable to access my local data file
     
     
-    //DATE TRACKING
+    //DATA TRACKING GENERATED FROM MAIN UI
     NSDate *currentDate;
     NSString *dateString;
     NSString *timeString;

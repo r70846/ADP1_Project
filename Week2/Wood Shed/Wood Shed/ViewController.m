@@ -34,16 +34,13 @@
     //Inititlaize topic variable
     dataStore.currentTopic = topicDisplay.text;
     
-    //Build array of practice session objects
-    dataStore.sessions = [[NSMutableArray alloc] init];
-    
     //find document directory, get the path to the document directory
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
     NSString *path = (NSString*)[paths objectAtIndex:0];
     
     //get path to my local data file
     localPath = [path stringByAppendingPathComponent:@"datalog.json"];
-    NSLog(@"%@", localPath);
+    //NSLog(@"%@", localPath);
     
     //If file exists load data
     if([[NSFileManager defaultManager] fileExistsAtPath:localPath])
@@ -54,20 +51,17 @@
         //Serialize data object to JSON data (Mutable Array)
         dataStore.sessions = [NSJSONSerialization JSONObjectWithData:oData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
 
-        //Create "Session" Dictionary to hold data
-        NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
         
         //Switch to log out data
-        if(false)
+        if(true)
         {
             for (NSInteger i=0; i<[dataStore.sessions count]; i++)
             {
                 //Log data from each session
-                dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:i];
-                NSLog(@"Topic: %@", [dCurrentSession objectForKey: @"topic"]);
-                NSLog(@"Date: %@", [dCurrentSession objectForKey: @"date"]);
-                NSLog(@"Start: %@", [dCurrentSession objectForKey: @"time"]);
-                NSLog(@"Duration: %@", [dCurrentSession objectForKey: @"duration"]);
+                NSLog(@"Topic: %@", [[dataStore.sessions objectAtIndex:i] objectForKey: @"topic"]);
+                NSLog(@"Date: %@", [[dataStore.sessions objectAtIndex:i] objectForKey: @"date"]);
+                NSLog(@"Start: %@", [[dataStore.sessions objectAtIndex:i] objectForKey: @"time"]);
+                NSLog(@"Duration: %@", [[dataStore.sessions objectAtIndex:i] objectForKey: @"duration"]);
             }
         }
     }
@@ -162,7 +156,7 @@
     //Add current session to the records
     [dataStore.sessions addObject:dCurrentSession];
     
-    //Switch to log out data
+    //Switch to view data for debug
     if(false)
     {
         //Log data from session being saved

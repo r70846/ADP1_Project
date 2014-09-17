@@ -16,8 +16,14 @@
 + (DataStore *) sharedInstance;
 
 @property (nonatomic, strong)NSMutableArray *sessions;
+@property (nonatomic, strong)NSMutableDictionary *currentSession;
+
+
+
+
 @property (nonatomic, strong)NSString *currentTopic;
 @property (nonatomic, strong)NSString *tempoNoteType;
 @property (nonatomic, strong)NSString *key;
+@property (nonatomic, strong)NSString *bowing;
 
 @end

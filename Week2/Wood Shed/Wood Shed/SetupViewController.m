@@ -37,7 +37,7 @@
     //setup shared instance of data storage in RAM
     dataStore = [DataStore sharedInstance];
     
-    //Disable Input in FIelds
+    //Disable Input in Fields
     topicDisplay.enabled = false;
     bpmDisplay.enabled = false;
     noteTypeDisplay.enabled = false;
@@ -238,25 +238,32 @@
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (actionSheet.tag == 100) {
+    if (actionSheet.tag == 100) {               //Topic
         if(buttonIndex < [topicArray count])
         {
             dataStore.currentTopic = [topicArray objectAtIndex:buttonIndex];
             topicDisplay.text = dataStore.currentTopic;
         }
     }
-    if (actionSheet.tag == 200) {
+    if (actionSheet.tag == 200) {               //Tempo
         if(buttonIndex < [tempoArray count])
         {
             dataStore.tempoNoteType = [tempoArray objectAtIndex:buttonIndex];
             noteTypeDisplay.text = dataStore.tempoNoteType;
         }
     }
-    if (actionSheet.tag == 300) {
+    if (actionSheet.tag == 300) {               //Key
         if(buttonIndex < [keyArray count])
         {
             dataStore.key = [keyArray objectAtIndex:buttonIndex];
             keyDisplay.text = dataStore.key;
+        }
+    }
+    if (actionSheet.tag == 400) {               //Bowing
+        if(buttonIndex < [keyArray count])
+        {
+            dataStore.bowing = [bowingArray objectAtIndex:buttonIndex];
+            bowingDisplay.text = dataStore.bowing;
         }
     }
 }

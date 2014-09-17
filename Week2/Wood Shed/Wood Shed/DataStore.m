@@ -20,6 +20,13 @@ static DataStore *_sharedInstance;
         //Built mutable array to hold gig dates (GigDateClass objects)
         _sessions = [[NSMutableArray alloc] init];
         
+        //Create "Session" Dictionary Object to hold session data
+        _currentSession = [[NSMutableDictionary alloc]init];
+        [_currentSession setValue:@"" forKey:@"topic"];
+        [_currentSession setValue:@"" forKey:@"date"];
+        [_currentSession setValue:@"" forKey:@"time"];
+        [_currentSession setValue:@"" forKey:@"duration"];
+        
 	}
 	return self;
 }
