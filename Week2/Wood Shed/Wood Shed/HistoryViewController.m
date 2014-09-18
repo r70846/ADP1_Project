@@ -5,6 +5,16 @@
 //  Created by Russell Gaspard on 9/11/14.
 //  Copyright (c) 2014 Russell Gaspard. All rights reserved.
 //
+/*
+ 
+ Russ Gaspard
+ Full Sail
+ Mobile Development
+ ADP1 1409
+ Milestone 2
+ Week 3
+ 
+ */
 
 #import "HistoryViewController.h"
 
@@ -227,11 +237,7 @@ Repetitions: 3
 	
   	NSString *sDetails = [[NSString alloc] initWithFormat:@"%@%@%@%@%@%@%@%@",sDate, sTime, sDur, sReps, sTempo, sKey, sBowing, sNotes];
     
-
-    
-    //NSLog(@"%@", dateTime);
    UIAlertView *detailPopup = [[UIAlertView alloc] initWithTitle:sTopic message:sDetails delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
     
     //Display alert view
     [detailPopup show];

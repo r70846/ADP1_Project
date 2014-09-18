@@ -11,7 +11,8 @@
  Full Sail
  Mobile Development
  ADP1 1409
- Week 1
+ Milestone 2
+ Week 3
  
  */
 
@@ -25,29 +26,78 @@
 
 - (void)viewDidLoad
 {
-
-    //DATA STOREAGE
-    
     //setup shared instance of data storage in RAM
     dataStore = [DataStore sharedInstance];
     
+    //Disable user input of text feilds,( must use interface controls )
+    topicDisplay.enabled = FALSE;
+    timerDisplay.enabled = FALSE;
+    counterDisplay.enabled = FALSE;
+    nomeDisplay.enabled = FALSE;
+
+    //Initialize main "practice" state variable
+    bPractice = FALSE;
+    
+    //Initialize Duration Timer
+    iTotalTime = 0;
+    bDisplayTimer = TRUE;
+    
+    //Initialize Repetition Counter
+    iTotalCount = 0;
+    counterDisplay.text = [NSString stringWithFormat:@"%i",iTotalCount];
+    
+    //Retrieve data from local file
+    [self getData];
+    
+    //Set up Metronome
+    [self setUpMetronome];
+    
+    //Set up drone
+    [self setUpDrone];
+    
+    //Hide Splash Screen
+    [self hideSplash];
+    
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    //If user has set up data, then display it!
+    [self displayData];
+     
+    [super viewWillAppear:animated];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+//Setup Interface Items
+-(void)getData
+{
+    //DATA STOREAGE
     //find document directory, get the path to the document directory
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
     NSString *path = (NSString*)[paths objectAtIndex:0];
     
     //get path to my local data file
     localPath = [path stringByAppendingPathComponent:@"datalog.json"];
-    NSLog(@"%@", localPath);
+    
+    //Log data
+    //NSLog(@"%@", localPath);
     
     //If file exists load data
     if([[NSFileManager defaultManager] fileExistsAtPath:localPath])
     {
         //Read content of file as data object
         NSData* oData = [NSData dataWithContentsOfFile:localPath];
-
+        
         //Serialize data object to JSON data (Mutable Array)
         dataStore.sessions = [NSJSONSerialization JSONObjectWithData:oData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
-
         
         //Switch to log out data
         if(false)
@@ -62,47 +112,53 @@
             }
         }
     }
-    
-    //SPLASH SCREEN
-    [self hideSplash];
-    
-    //WOOD SHED FUNCTIONS
-    
-    //Disable user input of text feilds,( must use interface controls )
-    topicDisplay.enabled = FALSE;
-    timerDisplay.enabled = FALSE;
-    counterDisplay.enabled = FALSE;
-    nomeDisplay.enabled = FALSE;
 
-    //PRACTICE SESSION AND TIMER
-    bPractice = FALSE;
+}
+
+-(IBAction)hideSplash
+{
+    fAlpha = 2; //Initialize alpha at 2 but don't start fade till 1. let it linger for a sec!
     
-    iTotalTime = 0;             //Initialize time counter
-    bDisplayTimer = TRUE;
+    //Launch repeating timer to run fadeOut
+    fadeTimer = [NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(fadeOut) userInfo:nil repeats:YES];
+};
+
+//Support function to hide Splash
+-(void)fadeOut
+{
+    fAlpha = fAlpha - .01;     //Fade Splash Screen
     
-    //COUNTER
-    iTotalCount = 0;             //Initialize time counter
-    counterDisplay.text = [NSString stringWithFormat:@"%i",iTotalCount];
-    
-    //METRONOME SETUP
-    
-    //Set BPM to stepper setting
+    if(fAlpha > 0 && fAlpha < 1) //Don't start fade till 1. let it linger for a sec!
+    {
+        splashScreen.alpha = fAlpha;
+    }
+    else if (fAlpha <= 0)       //Once it fades to zclear get it out of users way
+
+    {
+        splashScreen.hidden = true;
+    }
+}
+
+-(void)setUpMetronome
+{
+    //Initialize Metronome UI
     [self stepperChange:nil];
     
-    //Create string to represent resource path. Apparently must be done in this way (?)
+    //Create string to represent "click" resource path. Apparently must be done in this way (?)
     NSString *clickPath = [[NSBundle mainBundle] pathForResource:@"click" ofType:@"wav"];
     
-    //Create File URL based on string representation of path
+    //Create File URL based on string representation of "click" path
     NSURL *SoundURL = [NSURL fileURLWithPath:clickPath];
     
-    //Create SoundID for click sound
+    //Create SoundID for "click" sound
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)SoundURL, &Click);
     
     //Initialize metronome state variable
     bNome = FALSE;
-    
-    //DRONE SETUP
-    
+}
+
+-(void)setUpDrone
+{
     //Build array of 12 keys
     keyArray = [[NSMutableArray alloc] init];
 	[keyArray addObject:@"A"];
@@ -123,20 +179,16 @@
     
     //Initialize drone state variable
     bDrone = FALSE;
-    
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    //If user has set up data, then display it!
+//Show data from setup view
+-(void)displayData
+{
     if(![[dataStore.currentSession objectForKey: @"topic"]  isEqual: @""])
     {
         //Display topic
         topicDisplay.text = [dataStore.currentSession objectForKey: @"topic"];
         
-
         //Build NOTES string
         NSString *sNotes = [[NSMutableString alloc] init];
         if(![[dataStore.currentSession objectForKey: @"notes"] isEqual: @""])
@@ -173,89 +225,12 @@
         
         //Display other tags in "details" text view
         detailsDisplay.text = sDetails;
-        
-        
-    }
-    
-    
-    [super viewWillAppear:animated];
-    
-    //topicDisplay.text = dataStore.currentTopic;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
--(void)saveData
-{
-    //Save final duration to current session object
-    [dataStore.currentSession setValue:sDuration forKey:@"duration"];
-    
-    //Save any repetitions from counter to current session object
-    [dataStore.currentSession setValue:counterDisplay.text forKey:@"repetitions"];
-    
-    //Add current session to the records
-    [dataStore.sessions addObject:dataStore.currentSession];
-    
-    //Switch to view data for debug
-    if(true)
-    {
-        //Log data from session being saved
-
-        NSLog(@"Topic: %@", [dataStore.currentSession objectForKey: @"topic"]);
-        NSLog(@"Date: %@", [dataStore.currentSession objectForKey: @"date"]);
-        NSLog(@"Start: %@", [dataStore.currentSession objectForKey: @"time"]);
-        NSLog(@"Duration: %@", [dataStore.currentSession objectForKey: @"duration"]);
-        NSLog(@"Notes: %@", [dataStore.currentSession objectForKey: @"notes"]);
-        NSLog(@"Tempo %@", [dataStore.currentSession objectForKey: @"tempo"]);
-        NSLog(@"BPM: %@", [dataStore.currentSession objectForKey: @"bpm"]);
-        NSLog(@"Key: %@", [dataStore.currentSession objectForKey: @"key"]);
-        NSLog(@"Bowing: %@", [dataStore.currentSession objectForKey: @"bowing"]);
-        NSLog(@"Repetitions: %@", [dataStore.currentSession objectForKey: @"repetitions"]);
-    }
-
-     //Save as a JSON file
-     if ([NSJSONSerialization isValidJSONObject: dataStore.sessions]) {
-     
-     NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dataStore.sessions options: NSJSONWritingPrettyPrinted error: NULL];
-     [jsonData writeToFile:localPath atomically:YES];
-     }else
-     {
-         NSLog (@"can't save as JSON");
-         NSLog(@"%@", [dataStore.sessions description]);
-     }
-}
-
-
--(IBAction)hideSplash
-{
-    fAlpha = 2; //Initialize alpha at 2 but don't start fade till 1. let it linger for a sec!
-    
-    //Launch repeating timer to run fadeOut
-    fadeTimer = [NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(fadeOut) userInfo:nil repeats:YES];
-};
-
-
--(void)fadeOut
-{
-    fAlpha = fAlpha - .01;     //Fade Splash Screen
-    
-    if(fAlpha > 0 && fAlpha < 1) //Don't start fade till 1. let it linger for a sec!
-    {
-        splashScreen.alpha = fAlpha;
-    }
-    else if (fAlpha <= 0)       //Once it fades to zclear get it out of users way
-
-    {
-        splashScreen.hidden = true;
     }
 }
 
+// ACTION FUNCTIONS //////////////////
 
+// Start or Stop Practice Time
 -(IBAction)BeginPractice
 {
     
@@ -328,7 +303,7 @@
     }
 }
 
-
+//Support function fpr Practice Timer
 -(void)oneRound //Add one minute to timer
 {
     iTotalTime++;
@@ -340,7 +315,7 @@
     }
 }
 
-
+//Support function fpr Practice Timer
 -(IBAction)displayTimer
 {
     if(bDisplayTimer)
@@ -371,7 +346,7 @@
     }
 }
 
-
+//Change Repetition Counter
 -(IBAction)counterBtn:(UIButton *)button
 {
     //Which button?
@@ -392,7 +367,7 @@
     
 }
 
-
+//Start or Stop Metronome
 -(IBAction)Metronome
 {
     
@@ -435,13 +410,13 @@
     }
 }
 
-
--(void)Beat  //For each click of metronome
+//Support function for metronome
+-(void)Beat  //Runs on each click
 {
     AudioServicesPlaySystemSound(Click);
 }
 
-
+//Support function for metronome
 - (IBAction)stepperChange:(UIStepper *)sender //Change BPM on metronome
 {
     
@@ -478,30 +453,9 @@
 }
 
 
--(IBAction)droneStepperChange:(UIStepper *)sender;
-{
-    if(bDrone)
-    {
-        //Stop Drone Audio
-        [drone1 stop];
-        [drone2 stop];
-        
-        //Reset drone audio playback
-        drone1.currentTime = 0;
-        drone2.currentTime = 5;
-        
-        //Change State
-        bDrone = FALSE;
-        
-        //Restart
-        [self Drone];
-        
-    }
-    //Display the tonic note user has chosen
-    droneDisplay.text = [NSString stringWithFormat:@"%@",[keyArray objectAtIndex:(int)droneStepper.value]];
-}
 
 
+//Start or Stop Drone Tone
 -(IBAction)Drone
 {
     
@@ -565,6 +519,71 @@
         [droneButton setTitle: @"Start" forState: UIControlStateSelected];
         [droneButton setTitle: @"Start" forState: UIControlStateDisabled];
         bDrone = FALSE;
+    }
+}
+
+//Support function for Drone Tone
+-(IBAction)droneStepperChange:(UIStepper *)sender;
+{
+    if(bDrone)
+    {
+        //Stop Drone Audio
+        [drone1 stop];
+        [drone2 stop];
+        
+        //Reset drone audio playback
+        drone1.currentTime = 0;
+        drone2.currentTime = 5;
+        
+        //Change State
+        bDrone = FALSE;
+        
+        //Restart
+        [self Drone];
+        
+    }
+    //Display the tonic note user has chosen
+    droneDisplay.text = [NSString stringWithFormat:@"%@",[keyArray objectAtIndex:(int)droneStepper.value]];
+}
+
+
+//Save session data to record storage
+-(void)saveData
+{
+    //Save final duration to current session object
+    [dataStore.currentSession setValue:sDuration forKey:@"duration"];
+    
+    //Save any repetitions from counter to current session object
+    [dataStore.currentSession setValue:counterDisplay.text forKey:@"repetitions"];
+    
+    //Add current session to the records
+    [dataStore.sessions addObject:dataStore.currentSession];
+    
+    //Switch to view data for debug
+    if(false)
+    {
+        //Log data from session being saved
+        NSLog(@"Topic: %@", [dataStore.currentSession objectForKey: @"topic"]);
+        NSLog(@"Date: %@", [dataStore.currentSession objectForKey: @"date"]);
+        NSLog(@"Start: %@", [dataStore.currentSession objectForKey: @"time"]);
+        NSLog(@"Duration: %@", [dataStore.currentSession objectForKey: @"duration"]);
+        NSLog(@"Notes: %@", [dataStore.currentSession objectForKey: @"notes"]);
+        NSLog(@"Tempo %@", [dataStore.currentSession objectForKey: @"tempo"]);
+        NSLog(@"BPM: %@", [dataStore.currentSession objectForKey: @"bpm"]);
+        NSLog(@"Key: %@", [dataStore.currentSession objectForKey: @"key"]);
+        NSLog(@"Bowing: %@", [dataStore.currentSession objectForKey: @"bowing"]);
+        NSLog(@"Repetitions: %@", [dataStore.currentSession objectForKey: @"repetitions"]);
+    }
+    
+    //Save as a JSON file
+    if ([NSJSONSerialization isValidJSONObject: dataStore.sessions]) {
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dataStore.sessions options: NSJSONWritingPrettyPrinted error: NULL];
+        [jsonData writeToFile:localPath atomically:YES];
+    }else
+    {
+        NSLog (@"can't save as JSON");
+        NSLog(@"%@", [dataStore.sessions description]);
     }
 }
 

@@ -11,7 +11,8 @@
  Full Sail
  Mobile Development
  ADP1 1409
- Week 1
+ Milestone 2
+ Week 3
  
  */
 
@@ -44,7 +45,7 @@
     keyDisplay.enabled = false;
     bowingDisplay.enabled = false;
     
-    //Disable Currrent Data in Fields
+    //Place any Currrent Data in Fields
     topicDisplay.text = [dataStore.currentSession objectForKey: @"topic"];
     notesField.text = [dataStore.currentSession objectForKey: @"notes"];
     bpmDisplay.text = [dataStore.currentSession objectForKey: @"bpm"];
@@ -52,13 +53,12 @@
     keyDisplay.text = [dataStore.currentSession objectForKey: @"key"];
     bowingDisplay.text = [dataStore.currentSession objectForKey: @"bowing"];
     
+    //Setup Interface Items
     [self setUpTopicUI];
     [self setUpNotesUI];
     [self setUpTempoUI];
     [self setUpKeyUI];
     [self setUpBowingUI];
-    
-
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view.

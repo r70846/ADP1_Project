@@ -11,7 +11,8 @@
  Full Sail
  Mobile Development
  ADP1 1409
- Week 1
+ Milestone 2
+ Week 3
  
  */
 
@@ -90,20 +91,34 @@
     IBOutlet UIButton *nomeButton;
 }
 
--(IBAction)hideSplash;
 
+//Setup Data & Tools
+-(void)getData;
+-(IBAction)hideSplash;
+-(void)setUpMetronome;
+-(void)setUpDrone;
+-(void)displayData;
+
+//Timer
 -(IBAction)BeginPractice;
 -(IBAction)displayTimer;
 
--(void)saveData;
-
+//Counter
 -(IBAction)counterBtn:(UIButton *)button;
 
-
+//Metronome
 -(IBAction)Metronome;
 -(IBAction)stepperChange:(UIStepper *)sender;
 
+//Drone
 -(IBAction)Drone;
 -(IBAction)droneStepperChange:(UIStepper *)sender;
+
+//Save Data
+-(void)saveData;
+
+
+
+
 
 @end
