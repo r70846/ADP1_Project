@@ -88,11 +88,150 @@
     NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
     dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:indexPath.row];
     
-    //Combine date and time into single string
-    NSString *dateTime = [[NSString alloc] initWithFormat:@"%@ %@",[dCurrentSession objectForKey: @"date"],[dCurrentSession objectForKey: @"time"]];
+ /*
+Topic: Major Scale
+Date: 9/18/14
+Start: 4:50 AM
+Duration: 0 min
+Notes: Hi
+Tempo Quarter Note
+BPM: 040
+Key: D
+Bowing: Shuffle
+Repetitions: 3
+    
+  _currentSession = [[NSMutableDictionary alloc]init];
+  
+  [_currentSession setValue:@"" forKey:@"topic"];
+  
+  [_currentSession setValue:@"" forKey:@"date"];
+  [_currentSession setValue:@"" forKey:@"time"];
+  
+  [_currentSession setValue:@"" forKey:@"duration"];
+  [_currentSession setValue:@"" forKey:@"repetitions"];
+  
+  [_currentSession setValue:@"0" forKey:@"bpm"];
+  [_currentSession setValue:@"" forKey:@"tempo"];
+  [_currentSession setValue:@"" forKey:@"key"];
+  [_currentSession setValue:@"" forKey:@"bowing"];
+  [_currentSession setValue:@"" forKey:@"notes"];
+  
+  NSLog(@"Topic: %@", [dataStore.currentSession objectForKey: @"topic"]);
+  NSLog(@"Date: %@", [dataStore.currentSession objectForKey: @"date"]);
+  NSLog(@"Start: %@", [dataStore.currentSession objectForKey: @"time"]);
+  NSLog(@"Duration: %@", [dataStore.currentSession objectForKey: @"duration"]);
+  NSLog(@"Repetitions: %@", [dataStore.currentSession objectForKey: @"repetitions"]);
+  NSLog(@"Tempo %@", [dataStore.currentSession objectForKey: @"tempo"]);
+  NSLog(@"BPM: %@", [dataStore.currentSession objectForKey: @"bpm"]);
+  NSLog(@"Key: %@", [dataStore.currentSession objectForKey: @"key"]);
+  NSLog(@"Bowing: %@", [dataStore.currentSession objectForKey: @"bowing"]);
+  NSLog(@"Notes: %@", [dataStore.currentSession objectForKey: @"notes"]);
+  
+  //Display topic
+  topicDisplay.text = [dataStore.currentSession objectForKey: @"topic"];
+  
+  
+  //Build NOTES string
+  NSString *sNotes = [[NSMutableString alloc] init];
+  if(![[dataStore.currentSession objectForKey: @"notes"] isEqual: @""])
+  {
+  sNotes = [[NSString alloc] initWithFormat:@"NOTES: %@\n",[dataStore.currentSession objectForKey: @"notes"]];
+  }
+  else {sNotes = @"";}
+  
+  //Build TEMPO string
+  NSString *sTempo = [[NSMutableString alloc] init];
+  if(![[dataStore.currentSession objectForKey: @"tempo"] isEqual: @""])
+  {
+  sTempo = [[NSString alloc] initWithFormat:@"TEMPO: %@ = %@\n",[dataStore.currentSession objectForKey: @"tempo"], [dataStore.currentSession objectForKey: @"bpm"]];
+  }
+  else {sTempo = @"";}
+  
+  //Build KEY string
+  NSString *sKey = [[NSMutableString alloc] init];
+  if(![[dataStore.currentSession objectForKey: @"key"] isEqual: @""])
+  {
+  sKey = [[NSString alloc] initWithFormat:@"KEY: %@\n",[dataStore.currentSession objectForKey: @"key"]];
+  }
+  else {sKey = @"";}
+  
+  //Build BOWING string
+  NSString *sBowing = [[NSMutableString alloc] init];
+  if(![[dataStore.currentSession objectForKey: @"bowing"] isEqual: @""])
+  {
+  sBowing = [[NSString alloc] initWithFormat:@"BOWING: %@\n",[dataStore.currentSession objectForKey: @"bowing"]];
+  }
+  else {sBowing = @"";}
+  
+  NSString *sDetails = [[NSString alloc] initWithFormat:@"%@%@%@%@",sTempo, sKey, sBowing, sNotes];
+  
+  //Display other tags in "details" text view
+  detailsDisplay.text = sDetails;
+*/
+    
+    
+    
+	NSString *sTopic = [[NSMutableString alloc] init];    // Check for "topic" before reporting
+    if([dCurrentSession objectForKey:@"topic"]!= nil && ![[dCurrentSession objectForKey:@"topic"] isEqual: @""])
+    {
+		sTopic = [[NSString alloc] initWithFormat:@"%@",[dCurrentSession objectForKey: @"topic"]];
+	}else {sTopic = @"";}
+    
+	NSString *sDate = [[NSMutableString alloc] init];    // Check for "date" before reporting
+    if([dCurrentSession objectForKey:@"date"]!= nil && ![[dCurrentSession objectForKey:@"date"] isEqual: @""])
+    {
+		sDate = [[NSString alloc] initWithFormat:@"DATE: %@\n",[dCurrentSession objectForKey: @"date"]];
+	}else {sDate = @"";}
+    
+	NSString *sTime = [[NSMutableString alloc] init];    // Check for "time" before reporting
+    if([dCurrentSession objectForKey:@"time"]!= nil && ![[dCurrentSession objectForKey:@"time"] isEqual: @""])
+    {
+		sTime = [[NSString alloc] initWithFormat:@"TIME: %@\n",[dCurrentSession objectForKey: @"time"]];
+	}else {sTime = @"";}
+    
+	NSString *sDur = [[NSMutableString alloc] init];    // Check for "duration" before reporting
+    if([dCurrentSession objectForKey:@"duration"]!= nil)
+    {
+		sDur = [[NSString alloc] initWithFormat:@"DURATION: %@\n",[dCurrentSession objectForKey: @"duration"]];
+	}else {sDur = @"";}
+    
+	NSString *sReps = [[NSMutableString alloc] init];    // Check for "repetitions" before reporting
+    if([dCurrentSession objectForKey:@"repetitions"]!= nil && ![[dCurrentSession objectForKey:@"repetitions"] isEqual: @"0"])
+    {
+		sReps = [[NSString alloc] initWithFormat:@"REPETITIONS: %@\n",[dCurrentSession objectForKey: @"repetitions"]];
+	}else {sReps = @"";}
+    
+	NSString *sTempo = [[NSMutableString alloc] init];    // Check for "tempo" before reporting
+    if([dCurrentSession objectForKey:@"tempo"]!= nil && ![[dCurrentSession objectForKey:@"tempo"] isEqual: @""])
+    {
+		sTempo = [[NSString alloc] initWithFormat:@"TEMPO: %@ = %@ \n",[dCurrentSession objectForKey: @"bpm"],[dCurrentSession objectForKey: @"tempo"]];
+	}else {sTempo = @"";}
+    
+	NSString *sKey = [[NSMutableString alloc] init];    // Check for "key" before reporting
+    if([dCurrentSession objectForKey:@"key"]!= nil && ![[dCurrentSession objectForKey:@"key"] isEqual: @""])
+    {
+		sKey = [[NSString alloc] initWithFormat:@"KEY: %@\n",[dCurrentSession objectForKey: @"key"]];
+	}else {sKey = @"";}
+    
+	NSString *sBowing = [[NSMutableString alloc] init];    // Check for "bowing" before reporting
+    if([dCurrentSession objectForKey:@"bowing"]!= nil && ![[dCurrentSession objectForKey:@"bowing"] isEqual: @""])
+    {
+		sBowing = [[NSString alloc] initWithFormat:@"BOWING: %@\n",[dCurrentSession objectForKey: @"bowing"]];
+	}else {sBowing = @"";}
+    
+	NSString *sNotes = [[NSMutableString alloc] init];    // Check for "notes" before reporting
+    if([dCurrentSession objectForKey:@"notes"]!= nil && ![[dCurrentSession objectForKey:@"notes"] isEqual: @""])
+    {
+		sNotes = [[NSString alloc] initWithFormat:@"NOTES: %@\n",[dCurrentSession objectForKey: @"notes"]];
+	}else {sNotes = @"";}
+	
+  	NSString *sDetails = [[NSString alloc] initWithFormat:@"%@%@%@%@%@%@%@%@",sDate, sTime, sDur, sReps, sTempo, sKey, sBowing, sNotes];
+    
+
     
     //NSLog(@"%@", dateTime);
-   UIAlertView *detailPopup = [[UIAlertView alloc] initWithTitle:dateTime message:dateTime delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+   UIAlertView *detailPopup = [[UIAlertView alloc] initWithTitle:sTopic message:sDetails delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
     
     //Display alert view
     [detailPopup show];
