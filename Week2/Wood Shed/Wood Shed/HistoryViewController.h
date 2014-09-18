@@ -27,4 +27,8 @@
     
     IBOutlet  UITableView *mainTableView;
 }
+
+//Save Data
+-(void)sortByTopic;
+
 @end
