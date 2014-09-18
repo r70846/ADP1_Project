@@ -139,9 +139,40 @@
         //Display topic
         topicDisplay.text = [dataStore.currentSession objectForKey: @"topic"];
         
-        //Build single string to concat other tags
-        NSMutableString *sDetails = [[NSMutableString alloc] init];
-        sDetails = [dataStore.currentSession objectForKey: @"notes"];
+
+        //Build NOTES string
+        NSString *sNotes = [[NSMutableString alloc] init];
+        if(![[dataStore.currentSession objectForKey: @"notes"] isEqual: @""])
+        {
+            sNotes = [[NSString alloc] initWithFormat:@"NOTES: %@\n",[dataStore.currentSession objectForKey: @"notes"]];
+        }
+        else {sNotes = @"";}
+        
+        //Build TEMPO string
+        NSString *sTempo = [[NSMutableString alloc] init];
+        if(![[dataStore.currentSession objectForKey: @"tempo"] isEqual: @""])
+        {
+            sTempo = [[NSString alloc] initWithFormat:@"TEMPO: %@ = %@\n",[dataStore.currentSession objectForKey: @"tempo"], [dataStore.currentSession objectForKey: @"bpm"]];
+        }
+        else {sTempo = @"";}
+        
+        //Build KEY string
+        NSString *sKey = [[NSMutableString alloc] init];
+        if(![[dataStore.currentSession objectForKey: @"key"] isEqual: @""])
+        {
+            sKey = [[NSString alloc] initWithFormat:@"KEY: %@\n",[dataStore.currentSession objectForKey: @"key"]];
+        }
+        else {sKey = @"";}
+        
+        //Build BOWING string
+        NSString *sBowing = [[NSMutableString alloc] init];
+        if(![[dataStore.currentSession objectForKey: @"bowing"] isEqual: @""])
+        {
+            sBowing = [[NSString alloc] initWithFormat:@"BOWING: %@\n",[dataStore.currentSession objectForKey: @"bowing"]];
+        }
+        else {sBowing = @"";}
+        
+        NSString *sDetails = [[NSString alloc] initWithFormat:@"%@%@%@%@",sTempo, sKey, sBowing, sNotes];
         
         //Display other tags in "details" text view
         detailsDisplay.text = sDetails;

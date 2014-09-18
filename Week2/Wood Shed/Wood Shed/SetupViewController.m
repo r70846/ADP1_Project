@@ -82,7 +82,7 @@
 	[topicArray addObject:@"Natural Minor Scale"];
 	[topicArray addObject:@"Harmonic Minor Scale"];
 	[topicArray addObject:@"Melodic Minor Scale"];
-    
+	[topicArray addObject:@"[ Add New Topic ]"];
     
     //Build "actionsheet" as a drop down menu
     topicActionSheet = [[UIActionSheet alloc] initWithTitle:nil
@@ -232,17 +232,33 @@
     NSUInteger stepOne = stepperOne.value;
     NSUInteger stepTen = stepperTen.value;
     
-    if(stepOne == 10)
+    //if its first adjustment, start at 40 BPM
+    if([bpmDisplay.text isEqual: @"0"])
     {
         stepperOne.value = 0;
-        stepperTen.value = stepTen + 10;
+        stepperTen.value = 40;
+        
+        //Set note type to default
+        if([noteTypeDisplay.text isEqual: @""])
+        {
+            noteTypeDisplay.text = @"Quarter Note";
+        }
     }
-    if(stepOne == -1)
+    else  //Conditionals to coordinate dual steppers
     {
-        stepperOne.value = 9;
-        stepperTen.value = stepTen - 10;
+        if(stepOne == 10)
+        {
+            stepperOne.value = 0;
+            stepperTen.value = stepTen + 10;
+        }
+        if(stepOne == -1)
+        {
+            stepperOne.value = 9;
+            stepperTen.value = stepTen - 10;
+        }
     }
     
+    //Update display
     stepOne = stepperOne.value;
     stepTen = stepperTen.value;
     NSUInteger setting = stepOne + stepTen;
@@ -252,10 +268,7 @@
 
 -(IBAction)onClick:(UIButton *)button
 {
-    if(button.tag == 100){
-        [self setUpTopicUI];
-        [topicActionSheet showInView:self.view];
-    }
+    if(button.tag == 100){[topicActionSheet showInView:self.view];}
     if(button.tag == 200){[tempoActionSheet showInView:self.view];}
     if(button.tag == 300){[keyActionSheet showInView:self.view];}
     if(button.tag == 400){[bowingActionSheet showInView:self.view];}
@@ -263,15 +276,26 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (actionSheet.tag == 100) {               //Topic
+        
+
         if(buttonIndex < [topicArray count])
         {
-            topicDisplay.text = [topicArray objectAtIndex:buttonIndex];
+            if([[topicArray objectAtIndex:buttonIndex] isEqual:@"[ Add New Topic ]"])
+            {
+                NSLog(@"NEW");
+                topicDisplay.enabled = true;
+                [topicDisplay selectAll:nil];
+            }
+            else
+            {
+                topicDisplay.text = [topicArray objectAtIndex:buttonIndex];
+            }
         }
         else
         {
-            if([topicDisplay.text isEqual: @""]) //MUST choose topic if blank!
+            if([topicDisplay.text isEqual: @""])
             {
-                //If no topic dismiss view controller
+                //MUST choose topic if blank! If no topic dismiss view controller
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }
@@ -280,6 +304,12 @@
         if(buttonIndex < [tempoArray count])
         {
             noteTypeDisplay.text = [tempoArray objectAtIndex:buttonIndex];
+            
+            //If bpm not set yet, setto minimum tempo
+            if([bpmDisplay.text isEqual: @"0"])
+            {
+                [self stepperChange:nil];
+            }
         }
     }
     if (actionSheet.tag == 300) {               //Key
@@ -330,6 +360,7 @@
         [dataStore.currentSession setValue:topicDisplay.text forKey:@"topic"];
         [dataStore.currentSession setValue:notesField.text forKey:@"notes"];
         [dataStore.currentSession setValue:noteTypeDisplay.text forKey:@"tempo"];
+        [dataStore.currentSession setValue:bpmDisplay.text forKey:@"bpm"];
         [dataStore.currentSession setValue:keyDisplay.text forKey:@"key"];
         [dataStore.currentSession setValue:bowingDisplay.text forKey:@"bowing"];
     }
