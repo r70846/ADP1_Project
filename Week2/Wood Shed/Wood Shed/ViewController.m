@@ -233,73 +233,87 @@
 // Start or Stop Practice Time
 -(IBAction)BeginPractice
 {
-    
-    if(!bPractice)
+    if([topicDisplay.text isEqual: @""])
     {
-        //Set the current date and time
-        NSDate *currentDate = [NSDate date];
         
-        //Create format for date
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        if (dateFormatter != nil)
-        {
-            [dateFormatter setDateFormat:@"M/dd/YY"];
-        }
+        NSString *sMessage = @"Please specify a practice topic from the 'Setup >' menu.";
         
-        //Build the date into a string based on my day format
-        NSString *dateString = [[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate: currentDate]];
-
-        //Create format for times
-        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-        [timeFormatter setDateFormat:@"h:mm a"];
+        //Create alert view
+        UIAlertView *noTopicAlert = [[UIAlertView alloc] initWithTitle:@"Topic Required" message:sMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
-        //Build the start time into a string based on my time format
-        NSString *timeString = [[NSString alloc] initWithFormat:@"%@", [timeFormatter stringFromDate: currentDate]];
-        
-        //Inititlaize time tracker on "begin"
-        iTotalTime = 0;
-        sDuration = [NSString stringWithFormat:@"%i min",iTotalTime];
-        if(bDisplayTimer)
-        {
-            timerDisplay.text = sDuration;
-        }
-
-        //Launch repeating timer to run "Tick"
-        durationTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(oneRound) userInfo:nil repeats:YES];
-        
-        //Retitle button
-        [beginButton setTitle: @"End" forState: UIControlStateNormal];
-        [beginButton setTitle: @"End" forState: UIControlStateApplication];
-        [beginButton setTitle: @"End" forState: UIControlStateHighlighted];
-        [beginButton setTitle: @"End" forState: UIControlStateReserved];
-        [beginButton setTitle: @"End" forState: UIControlStateSelected];
-        [beginButton setTitle: @"End" forState: UIControlStateDisabled];
-        
-        
-        //Save date/time tage in current session object
-        [dataStore.currentSession setValue:dateString forKey:@"date"];
-        [dataStore.currentSession setValue:timeString forKey:@"time"];
-        
-        //State Change
-        bPractice = TRUE;
+        //Display alert view
+        [noTopicAlert show];
     }
     else
     {
-        //Retitle button
-        [beginButton setTitle: @"Begin" forState: UIControlStateNormal];
-        [beginButton setTitle: @"Begin" forState: UIControlStateApplication];
-        [beginButton setTitle: @"Begin" forState: UIControlStateHighlighted];
-        [beginButton setTitle: @"Begin" forState: UIControlStateReserved];
-        [beginButton setTitle: @"Begin" forState: UIControlStateSelected];
-        [beginButton setTitle: @"Begin" forState: UIControlStateDisabled];
-        
-        //kill timer
-        [durationTimer invalidate];
-        
-        //State Change
-        bPractice = FALSE;
-        
-        [self saveData];
+        if(!bPractice)
+        {
+            //Set the current date and time
+            NSDate *currentDate = [NSDate date];
+            
+            //Create format for date
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            if (dateFormatter != nil)
+            {
+                [dateFormatter setDateFormat:@"M/dd/YY"];
+            }
+            
+            //Build the date into a string based on my day format
+            NSString *dateString = [[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate: currentDate]];
+            
+            //Create format for times
+            NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+            [timeFormatter setDateFormat:@"h:mm a"];
+            
+            //Build the start time into a string based on my time format
+            NSString *timeString = [[NSString alloc] initWithFormat:@"%@", [timeFormatter stringFromDate: currentDate]];
+            
+            //Inititlaize time tracker on "begin"
+            iTotalTime = 0;
+            sDuration = [NSString stringWithFormat:@"%i min",iTotalTime];
+            if(bDisplayTimer)
+            {
+                timerDisplay.text = sDuration;
+            }
+            
+            //Launch repeating timer to run "Tick"
+            durationTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(oneRound) userInfo:nil repeats:YES];
+            
+            //Retitle button
+            [beginButton setTitle: @"End" forState: UIControlStateNormal];
+            [beginButton setTitle: @"End" forState: UIControlStateApplication];
+            [beginButton setTitle: @"End" forState: UIControlStateHighlighted];
+            [beginButton setTitle: @"End" forState: UIControlStateReserved];
+            [beginButton setTitle: @"End" forState: UIControlStateSelected];
+            [beginButton setTitle: @"End" forState: UIControlStateDisabled];
+            
+            
+            //Save date/time tage in current session object
+            [dataStore.currentSession setValue:dateString forKey:@"date"];
+            [dataStore.currentSession setValue:timeString forKey:@"time"];
+            
+            //State Change
+            bPractice = TRUE;
+        }
+        else
+        {
+            //Retitle button
+            [beginButton setTitle: @"Begin" forState: UIControlStateNormal];
+            [beginButton setTitle: @"Begin" forState: UIControlStateApplication];
+            [beginButton setTitle: @"Begin" forState: UIControlStateHighlighted];
+            [beginButton setTitle: @"Begin" forState: UIControlStateReserved];
+            [beginButton setTitle: @"Begin" forState: UIControlStateSelected];
+            [beginButton setTitle: @"Begin" forState: UIControlStateDisabled];
+            
+            //kill timer
+            [durationTimer invalidate];
+            
+            //State Change
+            bPractice = FALSE;
+            
+            [self saveData];
+        }
+
     }
 }
 
@@ -585,7 +599,49 @@
         NSLog (@"can't save as JSON");
         NSLog(@"%@", [dataStore.sessions description]);
     }
+    
+    //Clear the slate, prepare for new session
+    [self freshSession];
 }
 
+
+-(void)freshSession
+{
+    [dataStore.currentSession setValue:@"" forKey:@"topic"];
+    
+    [dataStore.currentSession  setValue:@"" forKey:@"date"];
+    [dataStore.currentSession  setValue:@"" forKey:@"time"];
+    
+    [dataStore.currentSession  setValue:@"" forKey:@"duration"];
+    [dataStore.currentSession  setValue:@"" forKey:@"repetitions"];
+    
+    [dataStore.currentSession  setValue:@"0" forKey:@"bpm"];
+    [dataStore.currentSession  setValue:@"" forKey:@"tempo"];
+    [dataStore.currentSession  setValue:@"" forKey:@"key"];
+    [dataStore.currentSession  setValue:@"" forKey:@"bowing"];
+    [dataStore.currentSession  setValue:@"" forKey:@"notes"];
+    
+    //Refresh topic display
+    topicDisplay.text = @"";
+    
+    //Initialize Duration Timer
+    iTotalTime = 0;
+    bDisplayTimer = TRUE;
+    
+    //Initialize Repetition Counter
+    iTotalCount = 0;
+    counterDisplay.text = [NSString stringWithFormat:@"%i",iTotalCount];
+    
+    //Kill any metronome
+    if(bNome){[self Metronome];}
+    
+    //Kill any drone
+    if(bDrone){[self Drone];}
+    
+    //Show splash and fade
+    splashScreen.hidden = false;
+    [self hideSplash];
+    
+}
 
 @end

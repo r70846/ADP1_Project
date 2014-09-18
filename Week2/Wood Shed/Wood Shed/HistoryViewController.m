@@ -24,6 +24,7 @@
 
 @implementation HistoryViewController
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,9 +34,9 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
-    
     //setup shared instance of data storage in RAM
     dataStore = [DataStore sharedInstance];
 
@@ -43,12 +44,14 @@
 	// Do any additional setup after loading the view.
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //NSLog(@"Total Records: %i", [dataStore.sessions count]);
+    //Relaod cells each time page is shown
     [self->mainTableView reloadData]; // to reload selected cell
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -60,10 +63,9 @@
 //Number of rows in table will equal the number of session objects in my data array
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     return [dataStore.sessions count];
-    
 }
+
 
 //Set each custom cell to reflect data from the same index of my dictionary "session" objects array
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,11 +74,6 @@
     
     if (cell != nil)
     {
-        //PracticeSession *currentSession = [aPracticeArray objectAtIndex:indexPath.row];
-        //[cell refreshCellWithInfo:currentSession.topic instString:currentMusician.instrument cellImage:currentMusician.instImage];
-        
-        //dataStore.sessions
-        
         //Create "Session" Dictionary to hold data
         NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
         dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:indexPath.row];
@@ -92,94 +89,15 @@
     return cell;
 }
 
+
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Create "Session" Dictionary to hold data
     NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
     dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:indexPath.row];
     
- /*
-Topic: Major Scale
-Date: 9/18/14
-Start: 4:50 AM
-Duration: 0 min
-Notes: Hi
-Tempo Quarter Note
-BPM: 040
-Key: D
-Bowing: Shuffle
-Repetitions: 3
     
-  _currentSession = [[NSMutableDictionary alloc]init];
-  
-  [_currentSession setValue:@"" forKey:@"topic"];
-  
-  [_currentSession setValue:@"" forKey:@"date"];
-  [_currentSession setValue:@"" forKey:@"time"];
-  
-  [_currentSession setValue:@"" forKey:@"duration"];
-  [_currentSession setValue:@"" forKey:@"repetitions"];
-  
-  [_currentSession setValue:@"0" forKey:@"bpm"];
-  [_currentSession setValue:@"" forKey:@"tempo"];
-  [_currentSession setValue:@"" forKey:@"key"];
-  [_currentSession setValue:@"" forKey:@"bowing"];
-  [_currentSession setValue:@"" forKey:@"notes"];
-  
-  NSLog(@"Topic: %@", [dataStore.currentSession objectForKey: @"topic"]);
-  NSLog(@"Date: %@", [dataStore.currentSession objectForKey: @"date"]);
-  NSLog(@"Start: %@", [dataStore.currentSession objectForKey: @"time"]);
-  NSLog(@"Duration: %@", [dataStore.currentSession objectForKey: @"duration"]);
-  NSLog(@"Repetitions: %@", [dataStore.currentSession objectForKey: @"repetitions"]);
-  NSLog(@"Tempo %@", [dataStore.currentSession objectForKey: @"tempo"]);
-  NSLog(@"BPM: %@", [dataStore.currentSession objectForKey: @"bpm"]);
-  NSLog(@"Key: %@", [dataStore.currentSession objectForKey: @"key"]);
-  NSLog(@"Bowing: %@", [dataStore.currentSession objectForKey: @"bowing"]);
-  NSLog(@"Notes: %@", [dataStore.currentSession objectForKey: @"notes"]);
-  
-  //Display topic
-  topicDisplay.text = [dataStore.currentSession objectForKey: @"topic"];
-  
-  
-  //Build NOTES string
-  NSString *sNotes = [[NSMutableString alloc] init];
-  if(![[dataStore.currentSession objectForKey: @"notes"] isEqual: @""])
-  {
-  sNotes = [[NSString alloc] initWithFormat:@"NOTES: %@\n",[dataStore.currentSession objectForKey: @"notes"]];
-  }
-  else {sNotes = @"";}
-  
-  //Build TEMPO string
-  NSString *sTempo = [[NSMutableString alloc] init];
-  if(![[dataStore.currentSession objectForKey: @"tempo"] isEqual: @""])
-  {
-  sTempo = [[NSString alloc] initWithFormat:@"TEMPO: %@ = %@\n",[dataStore.currentSession objectForKey: @"tempo"], [dataStore.currentSession objectForKey: @"bpm"]];
-  }
-  else {sTempo = @"";}
-  
-  //Build KEY string
-  NSString *sKey = [[NSMutableString alloc] init];
-  if(![[dataStore.currentSession objectForKey: @"key"] isEqual: @""])
-  {
-  sKey = [[NSString alloc] initWithFormat:@"KEY: %@\n",[dataStore.currentSession objectForKey: @"key"]];
-  }
-  else {sKey = @"";}
-  
-  //Build BOWING string
-  NSString *sBowing = [[NSMutableString alloc] init];
-  if(![[dataStore.currentSession objectForKey: @"bowing"] isEqual: @""])
-  {
-  sBowing = [[NSString alloc] initWithFormat:@"BOWING: %@\n",[dataStore.currentSession objectForKey: @"bowing"]];
-  }
-  else {sBowing = @"";}
-  
-  NSString *sDetails = [[NSString alloc] initWithFormat:@"%@%@%@%@",sTempo, sKey, sBowing, sNotes];
-  
-  //Display other tags in "details" text view
-  detailsDisplay.text = sDetails;
-*/
-    
-    
+    //Verify all data and format for popup display
     
 	NSString *sTopic = [[NSMutableString alloc] init];    // Check for "topic" before reporting
     if([dCurrentSession objectForKey:@"topic"]!= nil && ![[dCurrentSession objectForKey:@"topic"] isEqual: @""])
@@ -235,11 +153,13 @@ Repetitions: 3
 		sNotes = [[NSString alloc] initWithFormat:@"NOTES: %@\n",[dCurrentSession objectForKey: @"notes"]];
 	}else {sNotes = @"";}
 	
+    //Compile all valid date to a single string for display
   	NSString *sDetails = [[NSString alloc] initWithFormat:@"%@%@%@%@%@%@%@%@",sDate, sTime, sDur, sReps, sTempo, sKey, sBowing, sNotes];
     
-   UIAlertView *detailPopup = [[UIAlertView alloc] initWithTitle:sTopic message:sDetails delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    //Create my alert view "popup"
+    UIAlertView *detailPopup = [[UIAlertView alloc] initWithTitle:sTopic message:sDetails delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
-    //Display alert view
+    //Display alert "popup" view
     [detailPopup show];
 }
 

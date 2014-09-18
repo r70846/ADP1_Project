@@ -117,8 +117,8 @@
 //Save Data
 -(void)saveData;
 
-
-
+//Start fresh after save
+-(void)freshSession;
 
 
 @end
