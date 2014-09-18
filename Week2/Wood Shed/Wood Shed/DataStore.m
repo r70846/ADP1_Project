@@ -22,11 +22,18 @@ static DataStore *_sharedInstance;
         
         //Create "Session" Dictionary Object to hold session data
         _currentSession = [[NSMutableDictionary alloc]init];
+        
         [_currentSession setValue:@"" forKey:@"topic"];
+        
         [_currentSession setValue:@"" forKey:@"date"];
         [_currentSession setValue:@"" forKey:@"time"];
         [_currentSession setValue:@"" forKey:@"duration"];
         
+        [_currentSession setValue:@"0" forKey:@"bpm"];
+        [_currentSession setValue:@"" forKey:@"tempo"];
+        [_currentSession setValue:@"" forKey:@"key"];
+        [_currentSession setValue:@"" forKey:@"bowing"];
+        [_currentSession setValue:@"" forKey:@"notes"];
 	}
 	return self;
 }

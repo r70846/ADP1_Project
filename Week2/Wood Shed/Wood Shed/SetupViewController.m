@@ -44,69 +44,102 @@
     keyDisplay.enabled = false;
     bowingDisplay.enabled = false;
     
+    //Disable Currrent Data in Fields
+    topicDisplay.text = [dataStore.currentSession objectForKey: @"topic"];
+    notesField.text = [dataStore.currentSession objectForKey: @"notes"];
+    bpmDisplay.text = [dataStore.currentSession objectForKey: @"bpm"];
+    noteTypeDisplay.text = [dataStore.currentSession objectForKey: @"tempo"];
+    keyDisplay.text = [dataStore.currentSession objectForKey: @"key"];
+    bowingDisplay.text = [dataStore.currentSession objectForKey: @"bowing"];
     
-    // TOPIC ////////////////////////////////
+    [self setUpTopicUI];
+    [self setUpNotesUI];
+    [self setUpTempoUI];
+    [self setUpKeyUI];
+    [self setUpBowingUI];
     
+
+    
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    if([topicDisplay.text isEqual: @""]) //MUST choose topic if blank
+    {
+        [topicActionSheet showInView:self.view];
+    }
+    
+    [super viewDidAppear:animated];
+}
+
+-(void)setUpTopicUI
+{
+
     //Create Array to hold all possible topics
     topicArray = [[NSMutableArray alloc] init];
 	[topicArray addObject:@"Major Scale"];
 	[topicArray addObject:@"Natural Minor Scale"];
 	[topicArray addObject:@"Harmonic Minor Scale"];
 	[topicArray addObject:@"Melodic Minor Scale"];
-
+    
     
     //Build "actionsheet" as a drop down menu
     topicActionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self
-                                                    cancelButtonTitle:nil
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:nil];
-    
+                                                   delegate:self
+                                          cancelButtonTitle:nil
+                                     destructiveButtonTitle:nil
+                                          otherButtonTitles:nil];
     //Tag it so I can add more later...
     topicActionSheet.tag = 100;
-
+    
     //Add button for each topic in array
     for (NSString *topic in topicArray) {
         [topicActionSheet addButtonWithTitle:topic];
     }
-
-    //Add cancel button on the end
-    topicActionSheet.cancelButtonIndex = [topicActionSheet addButtonWithTitle:@"Cancel"];
+    
+    //if(![topicDisplay.text isEqual: @""]) //MUST choose topic if blank
+    //{
+        //Add cancel button on the end
+        topicActionSheet.cancelButtonIndex = [topicActionSheet addButtonWithTitle:@"Cancel"];
+    //}
     
     //This is a bit of a hack but effective...
     //Bottom button can't be clicked due to tab bar in the superview
     //Adding a blank button at the bottom makes others accessible
     [topicActionSheet addButtonWithTitle:@""];
     
-    // NOTES //////////////////////////////////
-    
-    [notesField setDelegate:self];
-    
+    //To handle keyboard
     [topicDisplay setDelegate:self];
-    //notesField.delegate = self;
-    
-    // TEMPO //////////////////////////////////
-    
+        
+}
+
+-(void)setUpNotesUI
+{
+    //To handle keyboard
+    [notesField setDelegate:self];
+}
+
+-(void)setUpTempoUI
+{
     //Set BPM to stepper setting
-    [self stepperChange:nil];
+    //[self stepperChange:nil];
     
     //Create Array to hold possible note types for tempo indication
     tempoArray = [[NSMutableArray alloc] init];
-	[tempoArray addObject:@"Quarter"];
-	[tempoArray addObject:@"Eighth"];
-	[tempoArray addObject:@"Sixteenth"];
+	[tempoArray addObject:@"Quarter Note"];
+	[tempoArray addObject:@"Eighth Note"];
+	[tempoArray addObject:@"Sixteenth Note"];
 	[tempoArray addObject:@"Half Note (1 & 3)"];
 	[tempoArray addObject:@"Half Note (2 & 4)"];
-	[tempoArray addObject:@"Whole"];
-	[tempoArray addObject:@"No Tempo"];
-
+	[tempoArray addObject:@"Whole Note"];
+    
     //Build "actionsheet" as a drop down menu
     tempoActionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                    delegate:self
                                           cancelButtonTitle:nil
                                      destructiveButtonTitle:nil
                                           otherButtonTitles:nil];
-    
     //Tag it so I can add more later...
     tempoActionSheet.tag = 200;
     
@@ -120,10 +153,9 @@
     
     //Adding a blank button at the bottom makes others accessible
     [tempoActionSheet addButtonWithTitle:@""];
-    
-    
-    // KEY ///////////////////////////////////
-    
+}
+
+-(void)setUpKeyUI{
     //Create Array to hold possible tonics for key indication
     keyArray = [[NSMutableArray alloc] init];
 	[keyArray addObject:@"-"];
@@ -143,15 +175,13 @@
 	[keyArray addObject:@"G"];
 	[keyArray addObject:@"G#"];
 	[keyArray addObject:@"Ab"];
-
     
     //Build "actionsheet" as a drop down menu
     keyActionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                   delegate:self
-                                          cancelButtonTitle:nil
-                                     destructiveButtonTitle:nil
-                                          otherButtonTitles:nil];
-    
+                                                 delegate:self
+                                        cancelButtonTitle:nil
+                                   destructiveButtonTitle:nil
+                                        otherButtonTitles:nil];
     //Tag it so I can add more later...
     keyActionSheet.tag = 300;
     
@@ -165,25 +195,22 @@
     
     //Adding a blank button at the bottom makes others accessible
     [keyActionSheet addButtonWithTitle:@""];
-    
-    // BOWING /////////////////////////////
-    
+}
+
+-(void)setUpBowingUI{
     //Create Array to hold possible tonics for key indication
     bowingArray = [[NSMutableArray alloc] init];
 	[bowingArray addObject:@"Straight"];
 	[bowingArray addObject:@"Chain"];
 	[bowingArray addObject:@"Jazz"];
 	[bowingArray addObject:@"Shuffle"];
-
-    
     
     //Build "actionsheet" as a drop down menu
     bowingActionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                 delegate:self
-                                        cancelButtonTitle:nil
-                                   destructiveButtonTitle:nil
-                                        otherButtonTitles:nil];
-    
+                                                    delegate:self
+                                           cancelButtonTitle:nil
+                                      destructiveButtonTitle:nil
+                                           otherButtonTitles:nil];
     //Tag it so I can add more later...
     bowingActionSheet.tag = 400;
     
@@ -197,13 +224,7 @@
     
     //Adding a blank button at the bottom makes others accessible
     [bowingActionSheet addButtonWithTitle:@""];
-
-    
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
-
-
 
 - (IBAction)stepperChange:(UIStepper *)sender //Change BPM on metronome
 {
@@ -231,7 +252,10 @@
 
 -(IBAction)onClick:(UIButton *)button
 {
-    if(button.tag == 100){[topicActionSheet showInView:self.view];}
+    if(button.tag == 100){
+        [self setUpTopicUI];
+        [topicActionSheet showInView:self.view];
+    }
     if(button.tag == 200){[tempoActionSheet showInView:self.view];}
     if(button.tag == 300){[keyActionSheet showInView:self.view];}
     if(button.tag == 400){[bowingActionSheet showInView:self.view];}
@@ -241,29 +265,33 @@
     if (actionSheet.tag == 100) {               //Topic
         if(buttonIndex < [topicArray count])
         {
-            dataStore.currentTopic = [topicArray objectAtIndex:buttonIndex];
-            topicDisplay.text = dataStore.currentTopic;
+            topicDisplay.text = [topicArray objectAtIndex:buttonIndex];
+        }
+        else
+        {
+            if([topicDisplay.text isEqual: @""]) //MUST choose topic if blank!
+            {
+                //If no topic dismiss view controller
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }
     }
     if (actionSheet.tag == 200) {               //Tempo
         if(buttonIndex < [tempoArray count])
         {
-            dataStore.tempoNoteType = [tempoArray objectAtIndex:buttonIndex];
-            noteTypeDisplay.text = dataStore.tempoNoteType;
+            noteTypeDisplay.text = [tempoArray objectAtIndex:buttonIndex];
         }
     }
     if (actionSheet.tag == 300) {               //Key
         if(buttonIndex < [keyArray count])
         {
-            dataStore.key = [keyArray objectAtIndex:buttonIndex];
-            keyDisplay.text = dataStore.key;
+            keyDisplay.text = [keyArray objectAtIndex:buttonIndex];
         }
     }
     if (actionSheet.tag == 400) {               //Bowing
         if(buttonIndex < [keyArray count])
         {
-            dataStore.bowing = [bowingArray objectAtIndex:buttonIndex];
-            bowingDisplay.text = dataStore.bowing;
+            bowingDisplay.text = [bowingArray objectAtIndex:buttonIndex];
         }
     }
 }
@@ -282,13 +310,29 @@
     return YES;
 }
 
+
+//Return keyboard on return
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
     if([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         return NO;
     }
-    
     return YES;
+}
+
+//Save data to current record on exit
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //If user has set topc, record data on exit
+    if(![topicDisplay.text isEqual: @""])
+    {
+        [dataStore.currentSession setValue:topicDisplay.text forKey:@"topic"];
+        [dataStore.currentSession setValue:notesField.text forKey:@"notes"];
+        [dataStore.currentSession setValue:noteTypeDisplay.text forKey:@"tempo"];
+        [dataStore.currentSession setValue:keyDisplay.text forKey:@"key"];
+        [dataStore.currentSession setValue:bowingDisplay.text forKey:@"bowing"];
+    }
+    
 }
 @end

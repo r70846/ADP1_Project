@@ -56,9 +56,16 @@
     
 }
 
+//To set up UI Interface
+-(void)setUpTopicUI;
+-(void)setUpNotesUI;
+-(void)setUpTempoUI;
+-(void)setUpKeyUI;
+-(void)setUpBowingUI;
 
 -(IBAction)onClick:(UIButton *)button;
 
 -(IBAction)stepperChange:(UIStepper *)sender;
+
 
 @end

@@ -53,7 +53,7 @@
 
         
         //Switch to log out data
-        if(true)
+        if(false)
         {
             for (NSInteger i=0; i<[dataStore.sessions count]; i++)
             {
@@ -132,9 +132,27 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    //If user has set up data, then display it!
+    if(![[dataStore.currentSession objectForKey: @"topic"]  isEqual: @""])
+    {
+        //Display topic
+        topicDisplay.text = [dataStore.currentSession objectForKey: @"topic"];
+        
+        //Build single string to concat other tags
+        NSMutableString *sDetails = [[NSMutableString alloc] init];
+        sDetails = [dataStore.currentSession objectForKey: @"notes"];
+        
+        //Display other tags in "details" text view
+        detailsDisplay.text = sDetails;
+        
+        
+    }
+    
+    
     [super viewWillAppear:animated];
     
-    topicDisplay.text = dataStore.currentTopic;
+    //topicDisplay.text = dataStore.currentTopic;
 }
 
 - (void)didReceiveMemoryWarning
