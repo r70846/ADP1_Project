@@ -27,7 +27,9 @@ static DataStore *_sharedInstance;
         
         [_currentSession setValue:@"" forKey:@"date"];
         [_currentSession setValue:@"" forKey:@"time"];
+        
         [_currentSession setValue:@"" forKey:@"duration"];
+        [_currentSession setValue:@"" forKey:@"repetitions"];
         
         [_currentSession setValue:@"0" forKey:@"bpm"];
         [_currentSession setValue:@"" forKey:@"tempo"];

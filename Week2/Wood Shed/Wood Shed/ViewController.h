@@ -36,9 +36,9 @@
     
     
     //DATA TRACKING GENERATED FROM MAIN UI
-    NSDate *currentDate;
-    NSString *dateString;
-    NSString *timeString;
+    //NSDate *currentDate;
+    //NSString *dateString;
+    //NSString *timeString;
     
     
     //DISPLAY PRACTICE TASKS

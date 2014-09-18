@@ -74,12 +74,29 @@
         //Combine date and time into single string
         NSString *dateTime = [[NSString alloc] initWithFormat:@"%@ %@",[dCurrentSession objectForKey: @"date"],[dCurrentSession objectForKey: @"time"]];
         
-        //Shoe title, date anad time in cell
+        //Show title, date anad time in cell
         cell.textLabel.text = [dCurrentSession objectForKey: @"topic"];
         cell.detailTextLabel.text = dateTime;
         
     }
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Create "Session" Dictionary to hold data
+    NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
+    dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:indexPath.row];
+    
+    //Combine date and time into single string
+    NSString *dateTime = [[NSString alloc] initWithFormat:@"%@ %@",[dCurrentSession objectForKey: @"date"],[dCurrentSession objectForKey: @"time"]];
+    
+    //NSLog(@"%@", dateTime);
+   UIAlertView *detailPopup = [[UIAlertView alloc] initWithTitle:dateTime message:dateTime delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    //Display alert view
+    [detailPopup show];
+}
+
 
 @end

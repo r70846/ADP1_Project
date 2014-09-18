@@ -31,16 +31,13 @@
     //setup shared instance of data storage in RAM
     dataStore = [DataStore sharedInstance];
     
-    //Inititlaize topic variable
-    dataStore.currentTopic = topicDisplay.text;
-    
     //find document directory, get the path to the document directory
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
     NSString *path = (NSString*)[paths objectAtIndex:0];
     
     //get path to my local data file
     localPath = [path stringByAppendingPathComponent:@"datalog.json"];
-    //NSLog(@"%@", localPath);
+    NSLog(@"%@", localPath);
     
     //If file exists load data
     if([[NSFileManager defaultManager] fileExistsAtPath:localPath])
@@ -195,25 +192,30 @@
 
 -(void)saveData
 {
-    //Create "Session" Dictionary to hold data
-    NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
-    [dCurrentSession setValue:topicDisplay.text forKey:@"topic"];
-    [dCurrentSession setValue:dateString forKey:@"date"];
-    [dCurrentSession setValue:timeString forKey:@"time"];
-    [dCurrentSession setValue:sDuration forKey:@"duration"];
+    //Save final duration to current session object
+    [dataStore.currentSession setValue:sDuration forKey:@"duration"];
+    
+    //Save any repetitions from counter to current session object
+    [dataStore.currentSession setValue:counterDisplay.text forKey:@"repetitions"];
     
     //Add current session to the records
-    [dataStore.sessions addObject:dCurrentSession];
+    [dataStore.sessions addObject:dataStore.currentSession];
     
     //Switch to view data for debug
-    if(false)
+    if(true)
     {
         //Log data from session being saved
-        dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:[dataStore.sessions count]-1];
-        NSLog(@"Topic: %@", [dCurrentSession objectForKey: @"topic"]);
-        NSLog(@"Date: %@", [dCurrentSession objectForKey: @"date"]);
-        NSLog(@"Start: %@", [dCurrentSession objectForKey: @"time"]);
-        NSLog(@"Duration: %@", [dCurrentSession objectForKey: @"duration"]);
+
+        NSLog(@"Topic: %@", [dataStore.currentSession objectForKey: @"topic"]);
+        NSLog(@"Date: %@", [dataStore.currentSession objectForKey: @"date"]);
+        NSLog(@"Start: %@", [dataStore.currentSession objectForKey: @"time"]);
+        NSLog(@"Duration: %@", [dataStore.currentSession objectForKey: @"duration"]);
+        NSLog(@"Notes: %@", [dataStore.currentSession objectForKey: @"notes"]);
+        NSLog(@"Tempo %@", [dataStore.currentSession objectForKey: @"tempo"]);
+        NSLog(@"BPM: %@", [dataStore.currentSession objectForKey: @"bpm"]);
+        NSLog(@"Key: %@", [dataStore.currentSession objectForKey: @"key"]);
+        NSLog(@"Bowing: %@", [dataStore.currentSession objectForKey: @"bowing"]);
+        NSLog(@"Repetitions: %@", [dataStore.currentSession objectForKey: @"repetitions"]);
     }
 
      //Save as a JSON file
@@ -260,7 +262,7 @@
     if(!bPractice)
     {
         //Set the current date and time
-        currentDate = [NSDate date];
+        NSDate *currentDate = [NSDate date];
         
         //Create format for date
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -270,14 +272,14 @@
         }
         
         //Build the date into a string based on my day format
-        dateString = [[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate: currentDate]];
-        
+        NSString *dateString = [[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate: currentDate]];
+
         //Create format for times
         NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
         [timeFormatter setDateFormat:@"h:mm a"];
         
         //Build the start time into a string based on my time format
-        timeString = [[NSString alloc] initWithFormat:@"%@", [timeFormatter stringFromDate: currentDate]];
+        NSString *timeString = [[NSString alloc] initWithFormat:@"%@", [timeFormatter stringFromDate: currentDate]];
         
         //Inititlaize time tracker on "begin"
         iTotalTime = 0;
@@ -297,6 +299,11 @@
         [beginButton setTitle: @"End" forState: UIControlStateReserved];
         [beginButton setTitle: @"End" forState: UIControlStateSelected];
         [beginButton setTitle: @"End" forState: UIControlStateDisabled];
+        
+        
+        //Save date/time tage in current session object
+        [dataStore.currentSession setValue:dateString forKey:@"date"];
+        [dataStore.currentSession setValue:timeString forKey:@"time"];
         
         //State Change
         bPractice = TRUE;
