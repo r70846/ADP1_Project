@@ -184,8 +184,8 @@
 //Show data from setup view
 -(void)displayData
 {
-    if(![[dataStore.currentSession objectForKey: @"topic"]  isEqual: @""])
-    {
+    //if(![[dataStore.currentSession objectForKey: @"topic"]  isEqual: @""])
+    //{
         //Display topic
         topicDisplay.text = [dataStore.currentSession objectForKey: @"topic"];
         
@@ -225,7 +225,7 @@
         
         //Display other tags in "details" text view
         detailsDisplay.text = sDetails;
-    }
+    //}
 }
 
 // ACTION FUNCTIONS //////////////////
@@ -600,13 +600,19 @@
         NSLog(@"%@", [dataStore.sessions description]);
     }
     
+    //Retrieve data from local file
+    [self getData];
+    
     //Clear the slate, prepare for new session
     [self freshSession];
+    
+
 }
 
 
 -(void)freshSession
 {
+    
     [dataStore.currentSession setValue:@"" forKey:@"topic"];
     
     [dataStore.currentSession  setValue:@"" forKey:@"date"];
@@ -620,9 +626,11 @@
     [dataStore.currentSession  setValue:@"" forKey:@"key"];
     [dataStore.currentSession  setValue:@"" forKey:@"bowing"];
     [dataStore.currentSession  setValue:@"" forKey:@"notes"];
-    
+     
     //Refresh topic display
-    topicDisplay.text = @"";
+    //topicDisplay.text = @"";
+    [self displayData];
+    
     
     //Initialize Duration Timer
     iTotalTime = 0;
@@ -640,6 +648,7 @@
     
     //Show splash and fade
     splashScreen.hidden = false;
+    
     [self hideSplash];
     
 }

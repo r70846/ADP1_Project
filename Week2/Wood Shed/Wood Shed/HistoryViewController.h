@@ -28,6 +28,12 @@
     IBOutlet  UITableView *mainTableView;
 }
 
+
+@property (strong, nonatomic) IBOutlet UISegmentedControl * segSorter;
+
+//Clicked control
+- (IBAction)segControlClicked:(id)sender;
+
 //Save Data
 -(void)sortByTopic;
 

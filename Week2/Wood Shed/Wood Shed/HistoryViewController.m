@@ -23,7 +23,7 @@
 @end
 
 @implementation HistoryViewController
-
+@synthesize segSorter;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,28 +48,38 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //make a copy of my data for sort operations
-    dataStore.sorter = dataStore.sessions;
-    
-    [self sortByTopic];
-    
-    //Relaod cells each time page is shown
-    [self->mainTableView reloadData]; // to reload selected cell
-    
+    //Load date per segmented control status
+    [self segControlClicked:nil];
 }
+
+- (IBAction)segControlClicked:(id)sender
+{
+    //[dataStore.sorter removeAllObjects];
+    
+    dataStore.sorter = [dataStore.sessions mutableCopy];
+    //dataStore.sorter = dataStore.sorter;
+    
+    if(segSorter.selectedSegmentIndex == 0) //Sort by date
+    {
+        //Do nothing data has inherent date/time sort
+
+    }
+    else if (segSorter.selectedSegmentIndex == 1) //Sort by topic
+    {
+        //Sort by topic
+        [self sortByTopic];
+    }
+
+    //Relaod table
+    [self->mainTableView reloadData];
+}
+
+
+
 
 //"bubble sort" by topic
 -(void)sortByTopic
 {
-    
-    /*
-    for (NSInteger i=0; i<[dataStore.sorter count] - 1; i++)
-    {
-        //get topic from two consecutive records
-        NSString *sTopic = [[dataStore.sessions objectAtIndex:i] objectForKey: @"topic"];
-        NSString *sNextTopic = [[dataStore.sessions objectAtIndex:i + 1] objectForKey: @"topic"];
-    }
-    */
     
         NSSortDescriptor *topicDescriptor =
         [[NSSortDescriptor alloc] initWithKey:@"topic"
@@ -78,8 +88,6 @@
         
         NSArray *descriptors = [NSArray arrayWithObjects:topicDescriptor, nil];
         dataStore.sorter = (NSMutableArray *)[dataStore.sessions sortedArrayUsingDescriptors:descriptors];
-
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -123,7 +131,7 @@
 {
     //Create "Session" Dictionary to hold data
     NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
-    dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:indexPath.row];
+    dCurrentSession = (NSMutableDictionary *)[dataStore.sorter objectAtIndex:indexPath.row];
     
     
     //Verify all data and format for popup display
