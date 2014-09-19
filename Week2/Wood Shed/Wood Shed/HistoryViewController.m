@@ -39,7 +39,7 @@
 {
     //setup shared instance of data storage in RAM
     dataStore = [DataStore sharedInstance];
-
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
@@ -48,10 +48,39 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    //make a copy of my data for sort operations
+    dataStore.sorter = dataStore.sessions;
+    
+    [self sortByTopic];
+    
     //Relaod cells each time page is shown
     [self->mainTableView reloadData]; // to reload selected cell
+    
 }
 
+//"bubble sort" by topic
+-(void)sortByTopic
+{
+    
+    /*
+    for (NSInteger i=0; i<[dataStore.sorter count] - 1; i++)
+    {
+        //get topic from two consecutive records
+        NSString *sTopic = [[dataStore.sessions objectAtIndex:i] objectForKey: @"topic"];
+        NSString *sNextTopic = [[dataStore.sessions objectAtIndex:i + 1] objectForKey: @"topic"];
+    }
+    */
+    
+        NSSortDescriptor *topicDescriptor =
+        [[NSSortDescriptor alloc] initWithKey:@"topic"
+                                    ascending:YES
+                                    selector:@selector(localizedCaseInsensitiveCompare:)];
+        
+        NSArray *descriptors = [NSArray arrayWithObjects:topicDescriptor, nil];
+        dataStore.sorter = (NSMutableArray *)[dataStore.sessions sortedArrayUsingDescriptors:descriptors];
+
+
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -63,7 +92,7 @@
 //Number of rows in table will equal the number of session objects in my data array
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [dataStore.sessions count];
+    return [dataStore.sorter count];
 }
 
 
@@ -76,7 +105,7 @@
     {
         //Create "Session" Dictionary to hold data
         NSMutableDictionary *dCurrentSession = [[NSMutableDictionary alloc]init];
-        dCurrentSession = (NSMutableDictionary *)[dataStore.sessions objectAtIndex:indexPath.row];
+        dCurrentSession = (NSMutableDictionary *)[dataStore.sorter objectAtIndex:indexPath.row];
 
         //Combine date and time into single string
         NSString *dateTime = [[NSString alloc] initWithFormat:@"%@ %@",[dCurrentSession objectForKey: @"date"],[dCurrentSession objectForKey: @"time"]];
