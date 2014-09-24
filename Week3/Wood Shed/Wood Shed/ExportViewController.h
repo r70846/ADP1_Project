@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DataStore.h"
 
-@interface ExportViewController : UIViewController
+@interface ExportViewController : UIViewController <UIAlertViewDelegate>
 {
     //DATA STORAGE
     DataStore *dataStore;    //shared instance of my data store object
@@ -30,9 +30,14 @@
     //Path to csv data file
     NSString *csvPath;     //Variable to access my csv data file
     
+    
+    
+    Boolean bEmailView;
 }
 
 -(IBAction)showEmailView;
+-(IBAction)clearData;
 -(void)createCSVFile;
+
 
 @end

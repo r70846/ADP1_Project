@@ -28,8 +28,9 @@
 - (void)viewDidLoad
 {
 
-    //Hide graphic
-    brandImage.hidden = true;
+    //To indicate email view
+    bEmailView = false;
+
     
     
     //find document directory, get the path to the document directory
@@ -49,7 +50,22 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    messageLabel.text = @"";
+    
+    if(bEmailView){
+        
+        //Hide graphic to show message
+        brandImage.hidden = true;
+        
+        bEmailView = false;
+    }
+    else
+    {
+        //Show graphic and hide message
+        brandImage.hidden = false;
+        messageLabel.text = @"";
+    }
+
+
     
     [super viewWillAppear:animated];
 }
@@ -168,6 +184,9 @@
     // Show email controller
     [self presentViewController:emailView animated:YES completion:NULL];
     
+    //To indicate email view
+    bEmailView = true;
+    
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
@@ -194,6 +213,30 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+-(IBAction)clearData
+{
+    NSString *sMessage = @"Are you sure you want to clear all practice records from Wood Shed?";
+    
+    //Create alert view
+    UIAlertView *noTopicAlert = [[UIAlertView alloc] initWithTitle:@"Delete Records?" message:sMessage delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",nil];
+    
+    //Display alert view
+    [noTopicAlert show];
+    
+}
 
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+            brandImage.hidden = true;
+    
+    if (buttonIndex == 0)
+    {
+            messageLabel.text = @"Cancel";
+    }
+    else
+    {
+            messageLabel.text = @"Yes";
+    }
+}
 
 @end

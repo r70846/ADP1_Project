@@ -547,6 +547,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="clearData" destination="sMD-xf-Vrk" eventType="touchUpInside" id="6h8-5J-Of6"/>
                                     <action selector="displayTimer" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7OE-Xv-HE8"/>
                                 </connections>
                             </button>
