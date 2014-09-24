@@ -196,7 +196,7 @@
                                 </connections>
                             </stepper>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gv0-fe-lH9">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="545"/>
+                                <rect key="frame" x="0.0" y="-1" width="320" height="545"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -487,10 +487,10 @@
             </objects>
             <point key="canvasLocation" x="1297" y="156"/>
         </scene>
-        <!--View Controller - Archive-->
+        <!--Export View Controller - Export-->
         <scene sceneID="fOu-gG-89V">
             <objects>
-                <viewController id="sMD-xf-Vrk" sceneMemberID="viewController">
+                <viewController id="sMD-xf-Vrk" customClass="ExportViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aBd-8j-1i2"/>
                         <viewControllerLayoutGuide type="bottom" id="RFa-AH-l6f"/>
@@ -498,11 +498,70 @@
                     <view key="view" contentMode="scaleToFill" id="e5H-Kh-ddM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logoSmall.png" translatesAutoresizingMaskIntoConstraints="NO" id="10K-xr-jib">
+                                <rect key="frame" x="64" y="70" width="188" height="118"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="188" translatesAutoresizingMaskIntoConstraints="NO" id="z8H-qH-aL5">
+                                <rect key="frame" x="64" y="70" width="188" height="118"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="0.2827063259" green="0.3728320537" blue="0.71785315689999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="russellmgaspard@yahoo.com" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hxV-vX-2tU">
+                                <rect key="frame" x="31" y="283" width="260" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bq-0P-6BD">
+                                <rect key="frame" x="39" y="255" width="83" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oyl-zb-3b2">
+                                <rect key="frame" x="30" y="349" width="260" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.72994080549999996" green="0.82560629900000004" blue="0.88990319289999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Export to Email">
+                                    <color key="titleColor" red="0.055341893789999999" green="0.29827668639999999" blue="0.71785315689999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="displayTimer" destination="vXZ-lx-hvc" eventType="touchUpInside" id="XRi-td-9EJ"/>
+                                    <action selector="showEmailView" destination="sMD-xf-Vrk" eventType="touchUpInside" id="xn9-sd-Pjd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxU-j4-prC">
+                                <rect key="frame" x="30" y="405" width="260" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.72994080549999996" green="0.82560629900000004" blue="0.88990319289999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Clear All Records">
+                                    <color key="titleColor" red="0.055341893789999999" green="0.29827668639999999" blue="0.71785315689999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="displayTimer" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7OE-Xv-HE8"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Archive" id="CLT-lw-Krj">
+                    <tabBarItem key="tabBarItem" title="Export" id="CLT-lw-Krj">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-8"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="brandImage" destination="10K-xr-jib" id="8ez-B1-0LM"/>
+                        <outlet property="exportButton" destination="Oyl-zb-3b2" id="8ts-wm-Osg"/>
+                        <outlet property="exportEmail" destination="hxV-vX-2tU" id="Iww-a4-rDH"/>
+                        <outlet property="messageLabel" destination="z8H-qH-aL5" id="FmL-Rq-WBO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hkg-LP-jTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -551,6 +610,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="logoSmall.png" width="256" height="163"/>
         <image name="splash.png" width="320" height="545"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -1,0 +1,573 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		605BFAE419C29A9300C66E2C /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 605BFAE319C29A9300C66E2C /* HistoryViewController.m */; };
+		6078F98D19D1FE02008A7663 /* logoSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 6078F98C19D1FE02008A7663 /* logoSmall.png */; };
+		607DD26419C31F5A00097630 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 607DD26319C31F5A00097630 /* splash.png */; };
+		608CD97519C3A6E500943613 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 608CD97419C3A6E500943613 /* DataStore.m */; };
+		60999D7D19C1DC5A0077055D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D7C19C1DC5A0077055D /* Foundation.framework */; };
+		60999D7F19C1DC5A0077055D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D7E19C1DC5A0077055D /* CoreGraphics.framework */; };
+		60999D8119C1DC5A0077055D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D8019C1DC5A0077055D /* UIKit.framework */; };
+		60999D8719C1DC5A0077055D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 60999D8519C1DC5A0077055D /* InfoPlist.strings */; };
+		60999D8919C1DC5A0077055D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60999D8819C1DC5A0077055D /* main.m */; };
+		60999D8D19C1DC5A0077055D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60999D8C19C1DC5A0077055D /* AppDelegate.m */; };
+		60999D9019C1DC5A0077055D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60999D8E19C1DC5A0077055D /* Main.storyboard */; };
+		60999D9319C1DC5A0077055D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60999D9219C1DC5A0077055D /* ViewController.m */; };
+		60999D9519C1DC5A0077055D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60999D9419C1DC5A0077055D /* Images.xcassets */; };
+		60999D9C19C1DC5A0077055D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D9B19C1DC5A0077055D /* XCTest.framework */; };
+		60999D9D19C1DC5A0077055D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D7C19C1DC5A0077055D /* Foundation.framework */; };
+		60999D9E19C1DC5A0077055D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999D8019C1DC5A0077055D /* UIKit.framework */; };
+		60999DA619C1DC5A0077055D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 60999DA419C1DC5A0077055D /* InfoPlist.strings */; };
+		60999DA819C1DC5A0077055D /* Wood_ShedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60999DA719C1DC5A0077055D /* Wood_ShedTests.m */; };
+		60999DB219C220DD0077055D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999DB119C220DD0077055D /* AudioToolbox.framework */; };
+		60999DB419C220E40077055D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60999DB319C220E40077055D /* AVFoundation.framework */; };
+		60999DB619C2220C0077055D /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DB519C2220C0077055D /* click.wav */; };
+		60999DBC19C230420077055D /* A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DB719C230420077055D /* A.wav */; };
+		60999DBD19C230420077055D /* A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DB819C230420077055D /* A#.wav */; };
+		60999DBE19C230420077055D /* B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DB919C230420077055D /* B.wav */; };
+		60999DBF19C230420077055D /* C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DBA19C230420077055D /* C.wav */; };
+		60999DC019C230420077055D /* C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DBB19C230420077055D /* C#.wav */; };
+		60999DC819C230550077055D /* D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC119C230550077055D /* D.wav */; };
+		60999DC919C230550077055D /* D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC219C230550077055D /* D#.wav */; };
+		60999DCA19C230550077055D /* E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC319C230550077055D /* E.wav */; };
+		60999DCB19C230550077055D /* F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC419C230550077055D /* F.wav */; };
+		60999DCC19C230550077055D /* F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC519C230550077055D /* F#.wav */; };
+		60999DCD19C230550077055D /* G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC619C230550077055D /* G.wav */; };
+		60999DCE19C230550077055D /* G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60999DC719C230550077055D /* G#.wav */; };
+		60999DD119C237240077055D /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60999DD019C237240077055D /* SetupViewController.m */; };
+		60CA288219D1002900B730F8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CA288119D1002900B730F8 /* MessageUI.framework */; };
+		60CA288519D1082A00B730F8 /* ExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CA288419D1082A00B730F8 /* ExportViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		60999D9F19C1DC5A0077055D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 60999D7119C1DC5A0077055D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 60999D7819C1DC5A0077055D;
+			remoteInfo = "Wood Shed";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		605BFAE219C29A9300C66E2C /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		605BFAE319C29A9300C66E2C /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		6078F98C19D1FE02008A7663 /* logoSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoSmall.png; sourceTree = "<group>"; };
+		607DD26319C31F5A00097630 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = ../splash.png; sourceTree = "<group>"; };
+		608CD97319C3A6E500943613 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
+		608CD97419C3A6E500943613 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
+		60999D7919C1DC5A0077055D /* Wood Shed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wood Shed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60999D7C19C1DC5A0077055D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		60999D7E19C1DC5A0077055D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		60999D8019C1DC5A0077055D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		60999D8419C1DC5A0077055D /* Wood Shed-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Wood Shed-Info.plist"; sourceTree = "<group>"; };
+		60999D8619C1DC5A0077055D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		60999D8819C1DC5A0077055D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		60999D8A19C1DC5A0077055D /* Wood Shed-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wood Shed-Prefix.pch"; sourceTree = "<group>"; };
+		60999D8B19C1DC5A0077055D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		60999D8C19C1DC5A0077055D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		60999D8F19C1DC5A0077055D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		60999D9119C1DC5A0077055D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		60999D9219C1DC5A0077055D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		60999D9419C1DC5A0077055D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		60999D9A19C1DC5A0077055D /* Wood ShedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wood ShedTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60999D9B19C1DC5A0077055D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		60999DA319C1DC5A0077055D /* Wood ShedTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Wood ShedTests-Info.plist"; sourceTree = "<group>"; };
+		60999DA519C1DC5A0077055D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		60999DA719C1DC5A0077055D /* Wood_ShedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Wood_ShedTests.m; sourceTree = "<group>"; };
+		60999DB119C220DD0077055D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		60999DB319C220E40077055D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		60999DB519C2220C0077055D /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click.wav; path = ../click.wav; sourceTree = "<group>"; };
+		60999DB719C230420077055D /* A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A.wav; sourceTree = "<group>"; };
+		60999DB819C230420077055D /* A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "A#.wav"; sourceTree = "<group>"; };
+		60999DB919C230420077055D /* B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = B.wav; sourceTree = "<group>"; };
+		60999DBA19C230420077055D /* C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C.wav; sourceTree = "<group>"; };
+		60999DBB19C230420077055D /* C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "C#.wav"; sourceTree = "<group>"; };
+		60999DC119C230550077055D /* D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = D.wav; sourceTree = "<group>"; };
+		60999DC219C230550077055D /* D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "D#.wav"; sourceTree = "<group>"; };
+		60999DC319C230550077055D /* E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = E.wav; sourceTree = "<group>"; };
+		60999DC419C230550077055D /* F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F.wav; sourceTree = "<group>"; };
+		60999DC519C230550077055D /* F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "F#.wav"; sourceTree = "<group>"; };
+		60999DC619C230550077055D /* G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = G.wav; sourceTree = "<group>"; };
+		60999DC719C230550077055D /* G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "G#.wav"; sourceTree = "<group>"; };
+		60999DCF19C237240077055D /* SetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupViewController.h; sourceTree = "<group>"; };
+		60999DD019C237240077055D /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
+		60CA288119D1002900B730F8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		60CA288319D1082A00B730F8 /* ExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportViewController.h; sourceTree = "<group>"; };
+		60CA288419D1082A00B730F8 /* ExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		60999D7619C1DC5A0077055D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60CA288219D1002900B730F8 /* MessageUI.framework in Frameworks */,
+				60999DB419C220E40077055D /* AVFoundation.framework in Frameworks */,
+				60999DB219C220DD0077055D /* AudioToolbox.framework in Frameworks */,
+				60999D7F19C1DC5A0077055D /* CoreGraphics.framework in Frameworks */,
+				60999D8119C1DC5A0077055D /* UIKit.framework in Frameworks */,
+				60999D7D19C1DC5A0077055D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60999D9719C1DC5A0077055D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60999D9C19C1DC5A0077055D /* XCTest.framework in Frameworks */,
+				60999D9E19C1DC5A0077055D /* UIKit.framework in Frameworks */,
+				60999D9D19C1DC5A0077055D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		60999D7019C1DC5A0077055D = {
+			isa = PBXGroup;
+			children = (
+				60999D8219C1DC5A0077055D /* Wood Shed */,
+				60999DA119C1DC5A0077055D /* Wood ShedTests */,
+				60999D7B19C1DC5A0077055D /* Frameworks */,
+				60999D7A19C1DC5A0077055D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		60999D7A19C1DC5A0077055D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				60999D7919C1DC5A0077055D /* Wood Shed.app */,
+				60999D9A19C1DC5A0077055D /* Wood ShedTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		60999D7B19C1DC5A0077055D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				60CA288119D1002900B730F8 /* MessageUI.framework */,
+				60999DB319C220E40077055D /* AVFoundation.framework */,
+				60999DB119C220DD0077055D /* AudioToolbox.framework */,
+				60999D7C19C1DC5A0077055D /* Foundation.framework */,
+				60999D7E19C1DC5A0077055D /* CoreGraphics.framework */,
+				60999D8019C1DC5A0077055D /* UIKit.framework */,
+				60999D9B19C1DC5A0077055D /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		60999D8219C1DC5A0077055D /* Wood Shed */ = {
+			isa = PBXGroup;
+			children = (
+				60999D8B19C1DC5A0077055D /* AppDelegate.h */,
+				60999D8C19C1DC5A0077055D /* AppDelegate.m */,
+				60999D8E19C1DC5A0077055D /* Main.storyboard */,
+				60CA288319D1082A00B730F8 /* ExportViewController.h */,
+				60CA288419D1082A00B730F8 /* ExportViewController.m */,
+				605BFAE219C29A9300C66E2C /* HistoryViewController.h */,
+				605BFAE319C29A9300C66E2C /* HistoryViewController.m */,
+				60999DCF19C237240077055D /* SetupViewController.h */,
+				60999DD019C237240077055D /* SetupViewController.m */,
+				608CD97319C3A6E500943613 /* DataStore.h */,
+				608CD97419C3A6E500943613 /* DataStore.m */,
+				60999D9119C1DC5A0077055D /* ViewController.h */,
+				60999D9219C1DC5A0077055D /* ViewController.m */,
+				60999D9419C1DC5A0077055D /* Images.xcassets */,
+				60999D8319C1DC5A0077055D /* Supporting Files */,
+			);
+			path = "Wood Shed";
+			sourceTree = "<group>";
+		};
+		60999D8319C1DC5A0077055D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6078F98C19D1FE02008A7663 /* logoSmall.png */,
+				607DD26319C31F5A00097630 /* splash.png */,
+				60999DC119C230550077055D /* D.wav */,
+				60999DC219C230550077055D /* D#.wav */,
+				60999DC319C230550077055D /* E.wav */,
+				60999DC419C230550077055D /* F.wav */,
+				60999DC519C230550077055D /* F#.wav */,
+				60999DC619C230550077055D /* G.wav */,
+				60999DC719C230550077055D /* G#.wav */,
+				60999DB719C230420077055D /* A.wav */,
+				60999DB819C230420077055D /* A#.wav */,
+				60999DB919C230420077055D /* B.wav */,
+				60999DBA19C230420077055D /* C.wav */,
+				60999DBB19C230420077055D /* C#.wav */,
+				60999DB519C2220C0077055D /* click.wav */,
+				60999D8419C1DC5A0077055D /* Wood Shed-Info.plist */,
+				60999D8519C1DC5A0077055D /* InfoPlist.strings */,
+				60999D8819C1DC5A0077055D /* main.m */,
+				60999D8A19C1DC5A0077055D /* Wood Shed-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		60999DA119C1DC5A0077055D /* Wood ShedTests */ = {
+			isa = PBXGroup;
+			children = (
+				60999DA719C1DC5A0077055D /* Wood_ShedTests.m */,
+				60999DA219C1DC5A0077055D /* Supporting Files */,
+			);
+			path = "Wood ShedTests";
+			sourceTree = "<group>";
+		};
+		60999DA219C1DC5A0077055D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				60999DA319C1DC5A0077055D /* Wood ShedTests-Info.plist */,
+				60999DA419C1DC5A0077055D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		60999D7819C1DC5A0077055D /* Wood Shed */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60999DAB19C1DC5A0077055D /* Build configuration list for PBXNativeTarget "Wood Shed" */;
+			buildPhases = (
+				60999D7519C1DC5A0077055D /* Sources */,
+				60999D7619C1DC5A0077055D /* Frameworks */,
+				60999D7719C1DC5A0077055D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Wood Shed";
+			productName = "Wood Shed";
+			productReference = 60999D7919C1DC5A0077055D /* Wood Shed.app */;
+			productType = "com.apple.product-type.application";
+		};
+		60999D9919C1DC5A0077055D /* Wood ShedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60999DAE19C1DC5A0077055D /* Build configuration list for PBXNativeTarget "Wood ShedTests" */;
+			buildPhases = (
+				60999D9619C1DC5A0077055D /* Sources */,
+				60999D9719C1DC5A0077055D /* Frameworks */,
+				60999D9819C1DC5A0077055D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				60999DA019C1DC5A0077055D /* PBXTargetDependency */,
+			);
+			name = "Wood ShedTests";
+			productName = "Wood ShedTests";
+			productReference = 60999D9A19C1DC5A0077055D /* Wood ShedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		60999D7119C1DC5A0077055D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Russell Gaspard";
+				TargetAttributes = {
+					60999D9919C1DC5A0077055D = {
+						TestTargetID = 60999D7819C1DC5A0077055D;
+					};
+				};
+			};
+			buildConfigurationList = 60999D7419C1DC5A0077055D /* Build configuration list for PBXProject "Wood Shed" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 60999D7019C1DC5A0077055D;
+			productRefGroup = 60999D7A19C1DC5A0077055D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				60999D7819C1DC5A0077055D /* Wood Shed */,
+				60999D9919C1DC5A0077055D /* Wood ShedTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		60999D7719C1DC5A0077055D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60999D9519C1DC5A0077055D /* Images.xcassets in Resources */,
+				60999D8719C1DC5A0077055D /* InfoPlist.strings in Resources */,
+				60999DBD19C230420077055D /* A#.wav in Resources */,
+				60999DCC19C230550077055D /* F#.wav in Resources */,
+				60999DC919C230550077055D /* D#.wav in Resources */,
+				60999DCB19C230550077055D /* F.wav in Resources */,
+				6078F98D19D1FE02008A7663 /* logoSmall.png in Resources */,
+				60999DCD19C230550077055D /* G.wav in Resources */,
+				60999DBE19C230420077055D /* B.wav in Resources */,
+				60999DBF19C230420077055D /* C.wav in Resources */,
+				60999DCA19C230550077055D /* E.wav in Resources */,
+				60999D9019C1DC5A0077055D /* Main.storyboard in Resources */,
+				60999DBC19C230420077055D /* A.wav in Resources */,
+				60999DCE19C230550077055D /* G#.wav in Resources */,
+				60999DC819C230550077055D /* D.wav in Resources */,
+				607DD26419C31F5A00097630 /* splash.png in Resources */,
+				60999DC019C230420077055D /* C#.wav in Resources */,
+				60999DB619C2220C0077055D /* click.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60999D9819C1DC5A0077055D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60999DA619C1DC5A0077055D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		60999D7519C1DC5A0077055D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60999DD119C237240077055D /* SetupViewController.m in Sources */,
+				60999D9319C1DC5A0077055D /* ViewController.m in Sources */,
+				60999D8D19C1DC5A0077055D /* AppDelegate.m in Sources */,
+				60999D8919C1DC5A0077055D /* main.m in Sources */,
+				605BFAE419C29A9300C66E2C /* HistoryViewController.m in Sources */,
+				608CD97519C3A6E500943613 /* DataStore.m in Sources */,
+				60CA288519D1082A00B730F8 /* ExportViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60999D9619C1DC5A0077055D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60999DA819C1DC5A0077055D /* Wood_ShedTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		60999DA019C1DC5A0077055D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 60999D7819C1DC5A0077055D /* Wood Shed */;
+			targetProxy = 60999D9F19C1DC5A0077055D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		60999D8519C1DC5A0077055D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				60999D8619C1DC5A0077055D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		60999D8E19C1DC5A0077055D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				60999D8F19C1DC5A0077055D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		60999DA419C1DC5A0077055D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				60999DA519C1DC5A0077055D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		60999DA919C1DC5A0077055D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		60999DAA19C1DC5A0077055D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		60999DAC19C1DC5A0077055D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Wood Shed/Wood Shed-Prefix.pch";
+				INFOPLIST_FILE = "Wood Shed/Wood Shed-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		60999DAD19C1DC5A0077055D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Wood Shed/Wood Shed-Prefix.pch";
+				INFOPLIST_FILE = "Wood Shed/Wood Shed-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		60999DAF19C1DC5A0077055D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Wood Shed.app/Wood Shed";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Wood Shed/Wood Shed-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Wood ShedTests/Wood ShedTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		60999DB019C1DC5A0077055D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Wood Shed.app/Wood Shed";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Wood Shed/Wood Shed-Prefix.pch";
+				INFOPLIST_FILE = "Wood ShedTests/Wood ShedTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		60999D7419C1DC5A0077055D /* Build configuration list for PBXProject "Wood Shed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60999DA919C1DC5A0077055D /* Debug */,
+				60999DAA19C1DC5A0077055D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60999DAB19C1DC5A0077055D /* Build configuration list for PBXNativeTarget "Wood Shed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60999DAC19C1DC5A0077055D /* Debug */,
+				60999DAD19C1DC5A0077055D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60999DAE19C1DC5A0077055D /* Build configuration list for PBXNativeTarget "Wood ShedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60999DAF19C1DC5A0077055D /* Debug */,
+				60999DB019C1DC5A0077055D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 60999D7119C1DC5A0077055D /* Project object */;
+}
