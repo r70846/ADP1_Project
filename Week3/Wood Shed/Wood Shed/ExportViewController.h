@@ -43,12 +43,19 @@
     Boolean bEmailView;
 }
 
+//Displays Email View
 -(IBAction)showEmailView;
+
+//From Button to [Clear All Data[
 -(IBAction)clearData;
 
+// Action on update of Default Email field
 -(IBAction)onChange;
 
+// Code to assemble comma delimited file
 -(void)createCSVFile;
+
+//Support function to add one line of data to csv file
 -(void)appendToFile:(NSString *)sData;
 
 @end

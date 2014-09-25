@@ -76,7 +76,7 @@
 
 
 
-//"bubble sort" by topic
+//Built-in 'sort' by topic
 -(void)sortByTopic
 {
     

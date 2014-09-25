@@ -140,25 +140,25 @@
     for (NSInteger i=0; i<[dataStore.sessions count]; i++)
     {
         //Verify all data and format for csv
-        NSString *sTopic = [[NSMutableString alloc] init];    // Check for "topic" before reporting
+        NSString *sTopic = [[NSMutableString alloc] init];    // Check for "topic" before exporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"topic"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"topic"] isEqual: @""])
         {
             sTopic = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"topic"]];
         }else {sTopic = @",";}
         
-        NSString *sDate = [[NSMutableString alloc] init];    // Check for "date" before reporting
+        NSString *sDate = [[NSMutableString alloc] init];    // Check for "date" before exporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"date"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"date"] isEqual: @""])
         {
             sDate =[[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"date"]];
         }else {sDate = @",";}
         
-        NSString *sTime = [[NSMutableString alloc] init];    // Check for "time" before reporting
+        NSString *sTime = [[NSMutableString alloc] init];    // Check for "time" before exporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"time"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"time"] isEqual: @""])
         {
             sTime = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"time"]];
         }else {sTime = @",";}
         
-        NSString *sDur = [[NSMutableString alloc] init];    // Check for "duration" before reporting
+        NSString *sDur = [[NSMutableString alloc] init];    // Check for "duration" before exporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"duration"]!= nil)
         {
             sDur = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"duration"]];
@@ -170,25 +170,25 @@
             sReps = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"repetitions"]];
         }else {sReps = @",";}
         
-        NSString *sTempo = [[NSMutableString alloc] init];    // Check for "tempo" before reporting
+        NSString *sTempo = [[NSMutableString alloc] init];    // Check for "tempo" before exporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"tempo"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"tempo"] isEqual: @""])
         {
             sTempo = [[NSString alloc] initWithFormat:@"%@ = %@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"bpm"],[[dataStore.sessions objectAtIndex:i] objectForKey: @"tempo"]];
         }else {sTempo = @",";}
          
-        NSString *sKey = [[NSMutableString alloc] init];    // Check for "key" before reporting
+        NSString *sKey = [[NSMutableString alloc] init];    // Check for "key" before exporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"key"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"key"] isEqual: @""])
         {
             sKey = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"key"]];
         }else {sKey = @",";}
         
-        NSString *sBowing = [[NSMutableString alloc] init];    // Check for "bowing" before reporting
+        NSString *sBowing = [[NSMutableString alloc] init];    // Check for "bowing" before export
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"bowing"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"bowing"] isEqual: @""])
         {
             sBowing = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"bowing"]];
         }else {sBowing = @",";}
         
-        NSString *sNotes = [[NSMutableString alloc] init];    // Check for "notes" before reporting
+        NSString *sNotes = [[NSMutableString alloc] init];    // Check for "notes" before exporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"notes"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"notes"] isEqual: @""])
         {
             sNotes = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"notes"]];
@@ -197,7 +197,7 @@
         //Compile all valid date to a single string for display
         NSString *sDetails = [[NSString alloc] initWithFormat:@"%@%@%@%@%@%@%@%@%@\n", sTopic,sDate, sTime, sDur, sReps, sTempo, sKey, sBowing, sNotes];
         
-        //Add row to current data
+        //Add row to current data file
         [self appendToFile:sDetails];
     }
 }
@@ -212,7 +212,7 @@
 
 -(IBAction)showEmailView{
     
-    if([dataStore.sessions count] > 0)
+    if([dataStore.sessions count] > 0)  // If we have data to export...
     {
         NSString *sSubject = @"Practice History";
         NSString *sMessage = @"Practice History";
@@ -236,7 +236,7 @@
         //To indicate email view
         bEmailView = true;
     }
-    else
+    else // No data to export...
     {
         //Hide graphic and show message
         brandImage.hidden = true;
