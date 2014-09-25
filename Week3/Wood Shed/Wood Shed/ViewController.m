@@ -34,7 +34,9 @@
     timerDisplay.enabled = FALSE;
     counterDisplay.enabled = FALSE;
     nomeDisplay.enabled = FALSE;
-
+    droneDisplay.enabled = FALSE;
+    
+    
     //Initialize main "practice" state variable
     bPractice = FALSE;
     

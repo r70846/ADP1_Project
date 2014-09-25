@@ -38,6 +38,6 @@
 -(IBAction)showEmailView;
 -(IBAction)clearData;
 -(void)createCSVFile;
-
+-(void)appendToFile:(NSString *)sData;
 
 @end

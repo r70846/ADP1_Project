@@ -27,22 +27,18 @@
 
 - (void)viewDidLoad
 {
-
+    //setup shared instance of data storage in RAM
+    dataStore = [DataStore sharedInstance];
+    
     //To indicate email view
     bEmailView = false;
 
-    
-    
     //find document directory, get the path to the document directory
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
     NSString *path = (NSString*)[paths objectAtIndex:0];
     
     //get path to my local data file
     csvPath = [path stringByAppendingPathComponent:@"datalog.csv"];
-
-    
-    
-    [self createCSVFile];
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
@@ -51,15 +47,19 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     
-    if(bEmailView){
+    if(bEmailView){  //Coming from Email View
         
         //Hide graphic to show message
         brandImage.hidden = true;
         
         bEmailView = false;
     }
-    else
+    else            //Coming form Tab Bar Controller
     {
+        
+        //Rebuild comma delimited data file
+        [self createCSVFile];
+        
         //Show graphic and hide message
         brandImage.hidden = false;
         messageLabel.text = @"";
@@ -80,87 +80,83 @@
 -(void)createCSVFile
 {
     
-    int asciiCode = 184;
-    NSString *string = [NSString stringWithFormat:@"%c", asciiCode];
     
-    NSString *sDetails = [[NSString alloc] initWithFormat:@"Topic,Date,Time,Duration,Repetitions,Tempo,Key,Bowing,Notes%@%@",string,@"Notes\n"];
- 
-    /*
-    for (NSInteger i=0; i<255; i++)
-    {
-        NSLog(@"%i %@", i, [NSString stringWithFormat:@"%c", i]);
-    }
-     
-     */
-    /*
-    
+    //Write header to file - overwrites old or create if absent
+    NSString *sHeader = @"Topic,Date,Time,Duration,Repetitions,Tempo,Key,Bowing,Notes\n";
+    [sHeader writeToFile:csvPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+
+    //Loop through practice sessions data
     for (NSInteger i=0; i<[dataStore.sessions count]; i++)
     {
-        
-        //Verify all data and format for popup display
+        //Verify all data and format for csv
         NSString *sTopic = [[NSMutableString alloc] init];    // Check for "topic" before reporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"topic"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"topic"] isEqual: @""])
         {
-            sTopic = [[NSString alloc] initWithFormat:@"%@",[[dataStore.sessions objectAtIndex:i] objectForKey: @"topic"]];
-        }else {sTopic = @"";}
+            sTopic = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"topic"]];
+        }else {sTopic = @",";}
         
         NSString *sDate = [[NSMutableString alloc] init];    // Check for "date" before reporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"date"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"date"] isEqual: @""])
         {
-            sDate = [[NSString alloc] initWithFormat:@"DATE: %@\n",[[dataStore.sessions objectAtIndex:i] objectForKey: @"date"]];
-        }else {sDate = @"";}
+            sDate =[[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"date"]];
+        }else {sDate = @",";}
         
         NSString *sTime = [[NSMutableString alloc] init];    // Check for "time" before reporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"time"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"time"] isEqual: @""])
         {
-            sTime = [[NSString alloc] initWithFormat:@"TIME: %@\n",[[dataStore.sessions objectAtIndex:i] objectForKey: @"time"]];
-        }else {sTime = @"";}
+            sTime = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"time"]];
+        }else {sTime = @",";}
         
         NSString *sDur = [[NSMutableString alloc] init];    // Check for "duration" before reporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"duration"]!= nil)
         {
-            sDur = [[NSString alloc] initWithFormat:@"DURATION: %@\n",[[dataStore.sessions objectAtIndex:i] objectForKey: @"duration"]];
-        }else {sDur = @"";}
+            sDur = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"duration"]];
+        }else {sDur = @",";}
         
-        NSString *sReps = [[NSMutableString alloc] init];    // Check for "repetitions" before reporting
+        NSString *sReps = [[NSMutableString alloc] init]; // Check for "repetitions"
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"repetitions"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"repetitions"] isEqual: @"0"])
         {
-            sReps = [[NSString alloc] initWithFormat:@"REPETITIONS: %@\n",[[dataStore.sessions objectAtIndex:i] objectForKey: @"repetitions"]];
-        }else {sReps = @"";}
+            sReps = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"repetitions"]];
+        }else {sReps = @",";}
         
         NSString *sTempo = [[NSMutableString alloc] init];    // Check for "tempo" before reporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"tempo"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"tempo"] isEqual: @""])
         {
-            sTempo = [[NSString alloc] initWithFormat:@"TEMPO: %@ = %@ \n",[[dataStore.sessions objectAtIndex:i] objectForKey: @"bpm"],[[dataStore.sessions objectAtIndex:i] objectForKey: @"tempo"]];
-        }else {sTempo = @"";}
-        
+            sTempo = [[NSString alloc] initWithFormat:@"%@ = %@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"bpm"],[[dataStore.sessions objectAtIndex:i] objectForKey: @"tempo"]];
+        }else {sTempo = @",";}
+         
         NSString *sKey = [[NSMutableString alloc] init];    // Check for "key" before reporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"key"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"key"] isEqual: @""])
         {
-            sKey = [[NSString alloc] initWithFormat:@"KEY: %@\n",[[dataStore.sessions objectAtIndex:i] objectForKey: @"key"]];
-        }else {sKey = @"";}
+            sKey = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"key"]];
+        }else {sKey = @",";}
         
         NSString *sBowing = [[NSMutableString alloc] init];    // Check for "bowing" before reporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"bowing"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"bowing"] isEqual: @""])
         {
-            sBowing = [[NSString alloc] initWithFormat:@"BOWING: %@\n",[[dataStore.sessions objectAtIndex:i] objectForKey: @"bowing"]];
-        }else {sBowing = @"";}
+            sBowing = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"bowing"]];
+        }else {sBowing = @",";}
         
         NSString *sNotes = [[NSMutableString alloc] init];    // Check for "notes" before reporting
         if([[dataStore.sessions objectAtIndex:i] objectForKey:@"notes"]!= nil && ![[[dataStore.sessions objectAtIndex:i] objectForKey:@"notes"] isEqual: @""])
         {
-            sNotes = [[NSString alloc] initWithFormat:@"NOTES: %@\n",[[dataStore.sessions objectAtIndex:i] objectForKey: @"notes"]];
-        }else {sNotes = @"";}
+            sNotes = [[NSString alloc] initWithFormat:@"%@,",[[dataStore.sessions objectAtIndex:i] objectForKey: @"notes"]];
+        }else {sNotes = @",";}
         
         //Compile all valid date to a single string for display
-        NSString *sDetails = [[NSString alloc] initWithFormat:@"%@%@%@%@%@%@%@%@",sDate, sTime, sDur, sReps, sTempo, sKey, sBowing, sNotes];
+        NSString *sDetails = [[NSString alloc] initWithFormat:@"%@%@%@%@%@%@%@%@%@\n", sTopic,sDate, sTime, sDur, sReps, sTempo, sKey, sBowing, sNotes];
+        
+        //Add row to current data
+        [self appendToFile:sDetails];
     }
-        */
-        
-        //[sDetails writeToFile:csvPath atomically:YES];
-        
-    [sDetails writeToFile:csvPath atomically:YES encoding:NSASCIIStringEncoding error:nil];
+}
 
+
+-(void)appendToFile:(NSString *)sData
+{
+    NSFileHandle *oHandle = [NSFileHandle fileHandleForWritingAtPath:csvPath];
+    [oHandle seekToEndOfFile];
+    [oHandle writeData:[sData dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(IBAction)showEmailView{
@@ -179,7 +175,7 @@
     NSData *dFile = [NSData dataWithContentsOfFile:csvPath];
     
     //Attach csv records file to email
-    [emailView addAttachmentData:dFile mimeType:@"text/csv" fileName:@"datalog"];
+    [emailView addAttachmentData:dFile mimeType:@"csv" fileName:@"datalog"];
     
     // Show email controller
     [self presentViewController:emailView animated:YES completion:NULL];
