@@ -32,13 +32,6 @@
     
     //To indicate email view
     bEmailView = false;
-
-    //find document directory, get the path to the document directory
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
-    NSString *path = (NSString*)[paths objectAtIndex:0];
-    
-    //get path to my local data file
-    csvPath = [path stringByAppendingPathComponent:@"datalog.csv"];
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
@@ -47,14 +40,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     
-    if(bEmailView){  //Coming from Email View
+    if(bEmailView){  //If we're coming from Email View
         
-        //Hide graphic to show message
+        //Hide branding graphic
         brandImage.hidden = true;
         
+        //Track status - No longer in Email View
         bEmailView = false;
     }
-    else            //Coming form Tab Bar Controller
+    else            //Coming from Tab Bar Controller
     {
         
         //Rebuild comma delimited data file
@@ -83,7 +77,7 @@
     
     //Write header to file - overwrites old or create if absent
     NSString *sHeader = @"Topic,Date,Time,Duration,Repetitions,Tempo,Key,Bowing,Notes\n";
-    [sHeader writeToFile:csvPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    [sHeader writeToFile:dataStore.csvPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 
     //Loop through practice sessions data
     for (NSInteger i=0; i<[dataStore.sessions count]; i++)
@@ -154,34 +148,43 @@
 
 -(void)appendToFile:(NSString *)sData
 {
-    NSFileHandle *oHandle = [NSFileHandle fileHandleForWritingAtPath:csvPath];
+    NSFileHandle *oHandle = [NSFileHandle fileHandleForWritingAtPath:dataStore.csvPath];
     [oHandle seekToEndOfFile];
     [oHandle writeData:[sData dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(IBAction)showEmailView{
     
-    NSString *sSubject = @"Practice History";
-    NSString *sMessage = @"Practice History";
-    NSArray *sRecipents = [NSArray arrayWithObject:@"russellmgaspard@yahoo.com"];
+    if([dataStore.sessions count] > 0)
+    {
+        NSString *sSubject = @"Practice History";
+        NSString *sMessage = @"Practice History";
+        NSArray *sRecipents = [NSArray arrayWithObject:@"russellmgaspard@yahoo.com"];
     
-    MFMailComposeViewController *emailView = [[MFMailComposeViewController alloc] init];
-    emailView.mailComposeDelegate = self;
-    [emailView setSubject:sSubject];
-    [emailView setMessageBody:sMessage isHTML:NO];
-    [emailView setToRecipients:sRecipents];
+        MFMailComposeViewController *emailView = [[MFMailComposeViewController alloc] init];
+        emailView.mailComposeDelegate = self;
+        [emailView setSubject:sSubject];
+        [emailView setMessageBody:sMessage isHTML:NO];
+        [emailView setToRecipients:sRecipents];
     
-    //Get reference to file as data object
-    NSData *dFile = [NSData dataWithContentsOfFile:csvPath];
+        //Get reference to file as data object
+        NSData *dFile = [NSData dataWithContentsOfFile:dataStore.csvPath];
     
-    //Attach csv records file to email
-    [emailView addAttachmentData:dFile mimeType:@"csv" fileName:@"datalog"];
+        //Attach csv records file to email
+        [emailView addAttachmentData:dFile mimeType:@"csv" fileName:@"datalog"];
     
-    // Show email controller
-    [self presentViewController:emailView animated:YES completion:NULL];
+        // Show email controller
+        [self presentViewController:emailView animated:YES completion:NULL];
     
-    //To indicate email view
-    bEmailView = true;
+        //To indicate email view
+        bEmailView = true;
+    }
+    else
+    {
+        //Hide graphic and show message
+        brandImage.hidden = true;
+        messageLabel.text = @"No Records\n Available";
+    }
     
 }
 
@@ -221,17 +224,32 @@
     
 }
 
+//User response to Clear Data Confirmation Alert...
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-            brandImage.hidden = true;
-    
-    if (buttonIndex == 0)
+    if (buttonIndex == 0)  //[ CANCELLED ]
     {
-            messageLabel.text = @"Cancel";
+        brandImage.hidden = false;
+        messageLabel.text = @"";
     }
-    else
+    else                    //[ CONFIRMED ]
     {
-            messageLabel.text = @"Yes";
+        //Clear all session data from main array
+        [dataStore.sessions removeAllObjects];
+        
+        //Save empty array to file
+        if ([NSJSONSerialization isValidJSONObject: dataStore.sessions]) {
+            
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dataStore.sessions options: NSJSONWritingPrettyPrinted error: NULL];
+            [jsonData writeToFile:dataStore.jsonPath atomically:YES];
+        }else
+        {
+            NSLog (@"Export View: can't save as JSON");
+        }
+
+        //Hide graphic and show message
+        brandImage.hidden = true;
+        messageLabel.text = @"Practice Records\n Cleared";
     }
 }
 

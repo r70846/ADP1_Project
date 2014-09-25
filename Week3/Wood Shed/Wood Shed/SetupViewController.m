@@ -98,16 +98,14 @@
         [topicActionSheet addButtonWithTitle:topic];
     }
     
-    //if(![topicDisplay.text isEqual: @""]) //MUST choose topic if blank
-    //{
         //Add cancel button on the end
         topicActionSheet.cancelButtonIndex = [topicActionSheet addButtonWithTitle:@"Cancel"];
-    //}
+
     
     //This is a bit of a hack but effective...
     //Bottom button can't be clicked due to tab bar in the superview
     //Adding a blank button at the bottom makes others accessible
-    [topicActionSheet addButtonWithTitle:@""];
+    //[topicActionSheet addButtonWithTitle:@""];
     
     //To handle keyboard
     [topicDisplay setDelegate:self];
@@ -127,6 +125,7 @@
     
     //Create Array to hold possible note types for tempo indication
     tempoArray = [[NSMutableArray alloc] init];
+	[tempoArray addObject:@""];
 	[tempoArray addObject:@"Quarter Note"];
 	[tempoArray addObject:@"Eighth Note"];
 	[tempoArray addObject:@"Sixteenth Note"];
@@ -150,15 +149,12 @@
     
     //Add cancel button on the end
     tempoActionSheet.cancelButtonIndex = [tempoActionSheet addButtonWithTitle:@"Cancel"];
-    
-    //Adding a blank button at the bottom makes others accessible
-    [tempoActionSheet addButtonWithTitle:@""];
 }
 
 -(void)setUpKeyUI{
     //Create Array to hold possible tonics for key indication
     keyArray = [[NSMutableArray alloc] init];
-	[keyArray addObject:@"-"];
+	[keyArray addObject:@""];
 	[keyArray addObject:@"A"];
 	[keyArray addObject:@"A#"];
 	[keyArray addObject:@"Bb"];
@@ -186,20 +182,19 @@
     keyActionSheet.tag = 300;
     
     //Add button for each topic in array
-    for (NSString *key in keyArray) {
-        [keyActionSheet addButtonWithTitle:key];
+    for (NSString *sKey in keyArray) {
+        [keyActionSheet addButtonWithTitle:sKey];
     }
     
     //Add cancel button on the end
     keyActionSheet.cancelButtonIndex = [keyActionSheet addButtonWithTitle:@"Cancel"];
     
-    //Adding a blank button at the bottom makes others accessible
-    [keyActionSheet addButtonWithTitle:@""];
 }
 
 -(void)setUpBowingUI{
     //Create Array to hold possible tonics for key indication
     bowingArray = [[NSMutableArray alloc] init];
+	[bowingArray addObject:@""];
 	[bowingArray addObject:@"Straight"];
 	[bowingArray addObject:@"Chain"];
 	[bowingArray addObject:@"Jazz"];
@@ -221,9 +216,6 @@
     
     //Add cancel button on the end
     bowingActionSheet.cancelButtonIndex = [bowingActionSheet addButtonWithTitle:@"Cancel"];
-    
-    //Adding a blank button at the bottom makes others accessible
-    [bowingActionSheet addButtonWithTitle:@""];
 }
 
 - (IBAction)stepperChange:(UIStepper *)sender //Change BPM on metronome
@@ -305,8 +297,8 @@
         {
             noteTypeDisplay.text = [tempoArray objectAtIndex:buttonIndex];
             
-            //If bpm not set yet, setto minimum tempo
-            if([bpmDisplay.text isEqual: @"0"])
+            //If notetype is set AND bpm not set yet, setto minimum tempo
+            if(![noteTypeDisplay.text isEqual: @""] && [bpmDisplay.text isEqual: @"0"])
             {
                 [self stepperChange:nil];
             }
@@ -319,7 +311,7 @@
         }
     }
     if (actionSheet.tag == 400) {               //Bowing
-        if(buttonIndex < [keyArray count])
+        if(buttonIndex < [bowingArray count])
         {
             bowingDisplay.text = [bowingArray objectAtIndex:buttonIndex];
         }

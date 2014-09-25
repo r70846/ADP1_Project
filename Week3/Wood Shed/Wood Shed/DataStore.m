@@ -46,9 +46,28 @@ static DataStore *_sharedInstance;
         [_currentSession setValue:@"" forKey:@"key"];
         [_currentSession setValue:@"" forKey:@"bowing"];
         [_currentSession setValue:@"" forKey:@"notes"];
+        
+        
+
+        //DATA STOREAGE
+        
+        //find document directory, get the path to the document directory
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
+        NSString *path = (NSString*)[paths objectAtIndex:0];
+        
+        //Log documents path
+        //NSLog(@"%@", path);
+        
+        //get path to my local json data file
+        _jsonPath = [path stringByAppendingPathComponent:@"datalog.json"];
+        
+        //get path to my local csv data file
+        _csvPath = [path stringByAppendingPathComponent:@"datalog.csv"];
+
 	}
 	return self;
 }
+
 
 
 + (DataStore *) sharedInstance

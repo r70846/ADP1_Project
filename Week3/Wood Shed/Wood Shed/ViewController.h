@@ -20,6 +20,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 #import "DataStore.h"
+#import "SetupViewController.h"
 
 @interface ViewController : UIViewController
 {
@@ -33,14 +34,6 @@
 
     //DATA STORAGE
     DataStore *dataStore;    //shared instance of my data store object
-    NSString *localPath;     //Variable to access my local data file
-    
-    
-    //DATA TRACKING GENERATED FROM MAIN UI
-    //NSDate *currentDate;
-    //NSString *dateString;
-    //NSString *timeString;
-    
     
     //DISPLAY PRACTICE TASKS
     IBOutlet UITextField *topicDisplay;

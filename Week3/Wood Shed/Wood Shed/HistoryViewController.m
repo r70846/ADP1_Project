@@ -54,10 +54,9 @@
 
 - (IBAction)segControlClicked:(id)sender
 {
-    //[dataStore.sorter removeAllObjects];
-    
+
+    //Copy data from main array
     dataStore.sorter = [dataStore.sessions mutableCopy];
-    //dataStore.sorter = dataStore.sorter;
     
     if(segSorter.selectedSegmentIndex == 0) //Sort by date
     {

@@ -26,12 +26,8 @@
     
     //Email Button
     IBOutlet UIButton *exportButton;
-    
-    //Path to csv data file
-    NSString *csvPath;     //Variable to access my csv data file
-    
-    
-    
+
+    //Keep track of where I'm coming from - (Tab Bar |or| Email View)
     Boolean bEmailView;
 }
 

@@ -28,5 +28,7 @@
 @property (nonatomic, strong)NSMutableArray *sessions;
 @property (nonatomic, strong)NSMutableArray *sorter;
 @property (nonatomic, strong)NSMutableDictionary *currentSession;
+@property (nonatomic, strong)NSString *jsonPath;
+@property (nonatomic, strong)NSString *csvPath;
 
 @end

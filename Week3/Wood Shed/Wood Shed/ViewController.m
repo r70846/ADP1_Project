@@ -35,7 +35,7 @@
     counterDisplay.enabled = FALSE;
     nomeDisplay.enabled = FALSE;
     droneDisplay.enabled = FALSE;
-    
+
     
     //Initialize main "practice" state variable
     bPractice = FALSE;
@@ -81,40 +81,15 @@
 //Setup Interface Items
 -(void)getData
 {
-    //DATA STOREAGE
-    //find document directory, get the path to the document directory
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
-    NSString *path = (NSString*)[paths objectAtIndex:0];
-    
-    //get path to my local data file
-    localPath = [path stringByAppendingPathComponent:@"datalog.json"];
-    
-    //Log data
-    NSLog(@"%@", localPath);
-    
     //If file exists load data
-    if([[NSFileManager defaultManager] fileExistsAtPath:localPath])
+    if([[NSFileManager defaultManager] fileExistsAtPath:dataStore.jsonPath])
     {
         //Read content of file as data object
-        NSData* oData = [NSData dataWithContentsOfFile:localPath];
+        NSData* oData = [NSData dataWithContentsOfFile:dataStore.jsonPath];
         
         //Serialize data object to JSON data (Mutable Array)
         dataStore.sessions = [NSJSONSerialization JSONObjectWithData:oData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:nil];
-        
-        //Switch to log out data
-        if(false)
-        {
-            for (NSInteger i=0; i<[dataStore.sessions count]; i++)
-            {
-                //Log data from each session
-                NSLog(@"Topic: %@", [[dataStore.sessions objectAtIndex:i] objectForKey: @"topic"]);
-                NSLog(@"Date: %@", [[dataStore.sessions objectAtIndex:i] objectForKey: @"date"]);
-                NSLog(@"Start: %@", [[dataStore.sessions objectAtIndex:i] objectForKey: @"time"]);
-                NSLog(@"Duration: %@", [[dataStore.sessions objectAtIndex:i] objectForKey: @"duration"]);
-            }
-        }
     }
-
 }
 
 -(IBAction)hideSplash
@@ -595,7 +570,7 @@
     if ([NSJSONSerialization isValidJSONObject: dataStore.sessions]) {
         
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dataStore.sessions options: NSJSONWritingPrettyPrinted error: NULL];
-        [jsonData writeToFile:localPath atomically:YES];
+        [jsonData writeToFile:dataStore.jsonPath atomically:YES];
     }else
     {
         NSLog (@"can't save as JSON");
@@ -636,6 +611,7 @@
     
     //Initialize Duration Timer
     iTotalTime = 0;
+    timerDisplay.text = @"-";
     bDisplayTimer = TRUE;
     
     //Initialize Repetition Counter
@@ -655,4 +631,11 @@
     
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+        
+        SetupViewController *destViewController = segue.destinationViewController;
+
+        // Hide bottom tab bar in the detail view
+        destViewController.hidesBottomBarWhenPushed = YES;
+}
 @end
