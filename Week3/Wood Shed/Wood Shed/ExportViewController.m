@@ -5,6 +5,16 @@
 //  Created by Russell Gaspard on 9/22/14.
 //  Copyright (c) 2014 Russell Gaspard. All rights reserved.
 //
+/*
+ 
+ Russ Gaspard
+ Full Sail
+ Mobile Development
+ ADP1 1409
+ Final Project
+ Week 4
+ 
+ */
 
 #import "ExportViewController.h"
 #import <MessageUI/MessageUI.h>
@@ -32,6 +42,27 @@
     
     //To indicate email view
     bEmailView = false;
+    
+    //retract keyboard
+    [exportEmail setDelegate:self];
+    
+    //Fill in defaul email for export
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if(defaults != nil)
+    {
+        //Get value
+        defaultEmail = [defaults objectForKey:@"email"];
+        if(defaultEmail != nil){
+            exportEmail.text = defaultEmail;
+        }
+        else
+        {
+            [defaults setObject:@"" forKey:@"email"];
+            
+            //saves the data
+            [defaults synchronize];
+        }
+    }
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
@@ -62,6 +93,32 @@
 
     
     [super viewWillAppear:animated];
+}
+
+
+-(IBAction)onChange
+{
+    NSLog(@"%@", exportEmail.text);
+    //Built in dictionary
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if(defaults != nil)
+    {
+        //Get changed email from text filed
+        defaultEmail = exportEmail.text;
+
+        if(defaultEmail != NULL){
+            [defaults setObject:defaultEmail forKey:@"email"];
+        
+            //saves the data
+            [defaults synchronize];
+        }
+    }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -159,8 +216,8 @@
     {
         NSString *sSubject = @"Practice History";
         NSString *sMessage = @"Practice History";
-        NSArray *sRecipents = [NSArray arrayWithObject:@"russellmgaspard@yahoo.com"];
-    
+        NSArray *sRecipents = [NSArray arrayWithObject:defaultEmail];
+
         MFMailComposeViewController *emailView = [[MFMailComposeViewController alloc] init];
         emailView.mailComposeDelegate = self;
         [emailView setSubject:sSubject];
@@ -193,13 +250,13 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            messageLabel.text = @"Export to Email\n Cancelled";
+            messageLabel.text = @"Export\n Email Cancelled";
             break;
         case MFMailComposeResultSaved:
-            messageLabel.text = @"Export to Email\n Saved";
+            messageLabel.text = @"Export\n Email Saved";
             break;
         case MFMailComposeResultSent:
-            messageLabel.text = @"Export to Email\n Sent";
+            messageLabel.text = @"Export\n Email Sent";
             break;
         case MFMailComposeResultFailed:
             messageLabel.text = [error localizedDescription];

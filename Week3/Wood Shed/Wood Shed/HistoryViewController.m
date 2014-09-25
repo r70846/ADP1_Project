@@ -11,8 +11,8 @@
  Full Sail
  Mobile Development
  ADP1 1409
- Milestone 2
- Week 3
+ Final Project
+ Week 4
  
  */
 

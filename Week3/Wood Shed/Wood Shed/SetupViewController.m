@@ -11,8 +11,8 @@
  Full Sail
  Mobile Development
  ADP1 1409
- Milestone 2
- Week 3
+ Final Project
+ Week 4
  
  */
 
@@ -98,15 +98,9 @@
         [topicActionSheet addButtonWithTitle:topic];
     }
     
-        //Add cancel button on the end
-        topicActionSheet.cancelButtonIndex = [topicActionSheet addButtonWithTitle:@"Cancel"];
+    //Add cancel button on the end
+    topicActionSheet.cancelButtonIndex = [topicActionSheet addButtonWithTitle:@"Cancel"];
 
-    
-    //This is a bit of a hack but effective...
-    //Bottom button can't be clicked due to tab bar in the superview
-    //Adding a blank button at the bottom makes others accessible
-    //[topicActionSheet addButtonWithTitle:@""];
-    
     //To handle keyboard
     [topicDisplay setDelegate:self];
         
@@ -326,7 +320,7 @@
 }
 
 
--(BOOL) textFieldShouldReturn:(UITextField *)textField{
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     [textField resignFirstResponder];
     return YES;
